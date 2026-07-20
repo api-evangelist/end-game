@@ -1,0 +1,16 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/end-game-openapi.json
+summary:
+  types:
+  - http
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  description: 'One of: an Endgame API key prefixed `eak_` (created from Settings → API Keys
+    with a Personal or Org-wide scope), or a WorkOS access token from an Endgame-provisioned
+    M2M application (created from Settings → Applications and exchanged via the `client_credentials`
+    grant).'
+  sources:
+  - openapi/end-game-openapi.json
