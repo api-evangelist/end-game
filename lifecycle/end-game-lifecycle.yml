@@ -1,0 +1,16 @@
+generated: '2026-07-19'
+method: searched
+source: https://docs.endgame.io/api-reference/introduction
+versioning:
+  scheme: uri-path
+  current: v1
+  base_path: /api/v1
+  stability: beta
+  docs: https://docs.endgame.io/api-reference/introduction
+status_page: https://docs.endgame.io/status
+changelog: https://docs.endgame.io/changelog
+deprecation:
+  policy_url: null
+  sunset_header: false
+  note: No formal deprecation/Sunset policy is documented; the public API is in beta and tools/behavior are subject to change.
+deprecated_operations: []

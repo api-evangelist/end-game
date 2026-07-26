@@ -1,22 +1,141 @@
 aid: end-game
-name: End Game
-description: End Game is a company surfaced as a portfolio company of a16z and added to the API Evangelist
-  network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+name: Endgame
+description: >-
+  Endgame (Endgame Labs, Inc.) is a context graph platform for go-to-market teams
+  and AI agents that turns sales calls, CRM records, emails, Slack conversations,
+  meeting transcripts, and uploaded documents into structured, queryable revenue
+  intelligence. Sales and RevOps users ask questions across their book of business
+  in natural language, and connected AI assistants reach the same knowledge through
+  the Endgame MCP Server. The public REST API (rooted at /api/v1) lets developers
+  create and manage Endgame threads programmatically over HTTPS with Bearer-token
+  authentication, while a broad connector surface ingests context from Salesforce,
+  Gong, Chorus, Clari Copilot, Zoom, Notion, Confluence, Highspot, Seismic,
+  Snowflake, Slack, Microsoft Teams/SharePoint/Outlook, and Google Drive. Endgame
+  was surfaced through the API Evangelist VC-portfolio pipeline and has been
+  enriched from its published developer documentation, OpenAPI, MCP server, and
+  trust/security programs.
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://www.endgame.io/opengraph-image
 url: https://raw.githubusercontent.com/api-evangelist/end-game/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - a16z
-x-tier: stub
-x-tier-reason: portfolio-lead
+x-tier: profiled
+x-tier-reason: enriched-from-developer-docs
+x-legal-entity: Endgame Labs, Inc.
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-19'
 tags:
 - Company
-apis: []
+- Sales
+- Revenue Intelligence
+- Go-To-Market
+- Artificial Intelligence
+- Agents
+- MCP
+- Knowledge Graph
+- CRM
+- Conversation Intelligence
+apis:
+- aid: end-game:end-game-threads-api
+  name: Endgame Threads API
+  description: The Threads API from Endgame — 2 operation(s) for threads.
+  humanURL: https://docs.endgame.io/api-reference/introduction
+  baseURL: https://app.endgame.io
+  tags:
+  - Threads
+  properties:
+  - type: OpenAPI
+    url: openapi/end-game-threads-api-openapi.yml
+  - type: Documentation
+    url: https://docs.endgame.io/api-reference/introduction
+  - type: Authentication
+    url: https://docs.endgame.io/api-reference/authentication
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+common:
+- type: TrustCenter
+  url: security/end-game-trust-center.yml
+- type: DomainSecurity
+  url: security/end-game-domain-security.yml
+- type: AgenticAccess
+  url: agentic-access/end-game-agentic-access.yml
+- type: Authentication
+  url: authentication/end-game-authentication.yml
+- type: Website
+  url: https://www.endgame.io
+- type: DeveloperPortal
+  url: https://docs.endgame.io
+- type: Documentation
+  url: https://docs.endgame.io
+- type: APIReference
+  url: https://docs.endgame.io/api-reference/endpoints
+- type: GettingStarted
+  url: https://docs.endgame.io/api-reference/introduction
+- type: Authentication
+  url: https://docs.endgame.io/api-reference/authentication
+- type: MCPServer
+  url: mcp/end-game-mcp.yml
+- type: OpenAPI
+  url: openapi/end-game-openapi.json
+- type: LLMsTxt
+  url: llms/end-game-llms.txt
+- type: ChangeLog
+  url: https://docs.endgame.io/changelog
+- type: StatusPage
+  url: https://docs.endgame.io/status
+- type: Support
+  url: https://docs.endgame.io/contact
+- type: Blog
+  url: https://www.endgame.io/blog
+- type: SignUp
+  url: https://www.endgame.io/signup
+- type: TermsOfService
+  url: https://www.endgame.io/terms
+- type: PrivacyPolicy
+  url: https://docs.endgame.io/trust/privacy
+- type: Compliance
+  url: https://docs.endgame.io/trust/security
+- type: VulnerabilityDisclosure
+  url: https://docs.endgame.io/vdp
+- type: Security
+  url: https://docs.endgame.io/vdp
+- type: ErrorCatalog
+  url: errors/end-game-error-codes.yml
+- type: Conventions
+  url: conventions/end-game-conventions.yml
+- type: DataModel
+  url: data-model/end-game-data-model.yml
+- type: RateLimits
+  url: rate-limits/end-game-rate-limits.yml
+- type: Conformance
+  url: conformance/end-game-conformance.yml
+- type: Lifecycle
+  url: lifecycle/end-game-lifecycle.yml
+- type: Overlay
+  url: overlays/end-game-openapi-overlay.yaml
+- type: ChangeLog
+  url: changelog/end-game-changelog.yml
+- type: AgentSkill
+  url: skills/_index.yml
+x-enrichment:
+  date: '2026-07-19'
+  status: backfilled
+  pass: local-v1
+  note: backfilled from .gitignore signal + verified work evidence

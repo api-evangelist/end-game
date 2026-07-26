@@ -1,0 +1,40 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/end-game-openapi.json
+docs: https://docs.endgame.io/api-reference/endpoints
+entities:
+- name: Thread
+  id_prefix: thr_
+  id_format: ULID-based (e.g. thr_01HZY6P8RB4K5C7X9E2N8MDQ4T)
+  description: A conversation thread in the caller's organization.
+  key_fields: [id, title, createdAt, updatedAt, accountId, secondaryId, published, deleted, threadUrl]
+  relationships:
+  - kind: has_many
+    target: ThreadMessage
+    via: threadId
+  - kind: has_one
+    target: ThreadStatus
+    via: derived
+  - kind: belongs_to
+    target: Account
+    via: accountId
+- name: ThreadMessage
+  id_prefix: msg_
+  description: A single user or assistant message on a thread.
+  key_fields: [id, threadId, role, content, status, createdAt, completedAt, steps, sources, attachments, model]
+  relationships:
+  - kind: belongs_to
+    target: Thread
+    via: threadId
+- name: ThreadStatus
+  description: Derived run status computed from the latest assistant message (idle | in_progress | error).
+  key_fields: [state, activeMessageId, latestUpdate, stepCount]
+  relationships:
+  - kind: belongs_to
+    target: Thread
+    via: derived
+- name: Account
+  external: true
+  description: >-
+    CRM account the thread is associated with. Not managed by this API; referenced
+    by accountId (e.g. a Salesforce 18-character account id).

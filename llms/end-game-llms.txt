@@ -1,0 +1,72 @@
+# Endgame
+
+## Docs
+
+- [Admin's Guide to Endgame](https://docs.endgame.io/admin-getting-started.md): Welcome to the ultimate sales knowledge control tower
+- [Querying Endgame via URL](https://docs.endgame.io/admin_tips/query-endgame-from-url.md): You can launch Endgame queries directly from a URL—useful for bookmarks, Salesforce and Slack workflows, or embedding links in dashboards and documentation.
+- [Authentication](https://docs.endgame.io/api-reference/authentication.md): Create and use API keys or machine-to-machine credentials to authenticate REST API requests.
+- [Endpoints](https://docs.endgame.io/api-reference/endpoints.md): Reference for the five thread endpoints that make up the public API.
+- [Introduction](https://docs.endgame.io/api-reference/introduction.md): Create and manage Endgame threads over a standard HTTPS REST API.
+- [Authentication](https://docs.endgame.io/authentication/index.md): Learn about the available login options and granting user access.
+- [Changelog](https://docs.endgame.io/changelog.md): Product updates and announcements
+- [Contact Us](https://docs.endgame.io/contact.md): Get in touch with the Endgame support team
+- [Core Concepts](https://docs.endgame.io/core-concepts.md): Understand how Endgame transforms your sales process
+- [Ask Better Questions](https://docs.endgame.io/endgame-chat-201.md): Master advanced prompting techniques to unlock Endgame's full potential
+- [Export Thread Content](https://docs.endgame.io/features/export-thread-content.md): How to export chat thread responses
+- [File Upload](https://docs.endgame.io/features/file-upload.md): Adding contextual knowledge to your chat responses
+- [MCP Server](https://docs.endgame.io/features/mcp-server.md): Connect Endgame to AI assistants using the Model Context Protocol
+- [Publishing & Sharing](https://docs.endgame.io/features/publishing-and-sharing.md): Share your AI-generated insights with teammates and external stakeholders
+- [Skills](https://docs.endgame.io/features/skills.md): Create repeatable, standardized workflows and artifacts
+- [Slack](https://docs.endgame.io/features/slack.md): Use Endgame threads within Slack
+- [Tasks: Personal Digests](https://docs.endgame.io/features/tasks.md): Configure custom Endgame digests, sent straight to your inbox.
+- [User Preferences](https://docs.endgame.io/features/user-preferences.md): Personal preferences and stored memories to improve your chat experience
+- [Website](https://docs.endgame.io/homepage.md): Visit the Endgame homepage
+- [Build Your First Skill](https://docs.endgame.io/implementation-guide/build-first-skill.md): Turn a repeatable workflow into a reusable skill your team can run
+- [Configure Salesforce Fields](https://docs.endgame.io/implementation-guide/configure-salesforce.md): Tell Endgame which custom fields matter so responses reference the right data
+- [Connect Transcripts](https://docs.endgame.io/implementation-guide/connect-conversations.md): Verify your call recording integration and understand what flows into Endgame
+- [Connect Chat](https://docs.endgame.io/implementation-guide/connect-slack.md): Map Slack or Microsoft Teams channels to accounts so internal context powers Endgame responses
+- [Create Your First Rule](https://docs.endgame.io/implementation-guide/create-first-rule.md): Teach Endgame your org's terminology and CRM conventions
+- [Invite Your Team](https://docs.endgame.io/implementation-guide/invite-team.md): Bring users in and set them up for success
+- [Login & Connect CRM](https://docs.endgame.io/implementation-guide/login-and-connect-crm.md): Get up and running with Endgame in minutes
+- [Overview](https://docs.endgame.io/implementation-guide/overview.md): Set up Endgame from scratch so your team can start getting value on day one
+- [Test Drive](https://docs.endgame.io/implementation-guide/test-drive.md): Validate your configuration by chatting with Endgame across a few accounts
+- [Upload Knowledge](https://docs.endgame.io/implementation-guide/upload-knowledge.md): Add your sales methodology, battlecards, and playbooks to shape how Endgame thinks
+- [Welcome to Endgame](https://docs.endgame.io/index.md): Transform enterprise sales with AI-powered knowledge
+- [Chorus](https://docs.endgame.io/integrations/chorus.md): Process Chorus call recordings and gain insights from your meetings
+- [Clari Copilot](https://docs.endgame.io/integrations/clari-copilot.md): Process Clari Copilot call recordings and gain insights from your meetings
+- [Confluence](https://docs.endgame.io/integrations/confluence.md): Connect Confluence to sync Spaces as knowledge
+- [Endgame Notetaker](https://docs.endgame.io/integrations/endgame-notetaker.md): Enable the Endgame Notetaker to join meetings and generate call transcripts
+- [Gong](https://docs.endgame.io/integrations/gong.md): Connect Gong to automatically process call transcripts and gain AI-powered insights
+- [Google Drive](https://docs.endgame.io/integrations/google-drive.md): Connect to Google Drive to sync context documents, export directly to Drive, and sync your calendar
+- [Highspot](https://docs.endgame.io/integrations/highspot.md): Connect Highspot to sync sales enablement content as knowledge
+- [Looker](https://docs.endgame.io/integrations/looker.md): Grant Endgame access to execute select Looker queries
+- [Microsoft Outlook Calendar](https://docs.endgame.io/integrations/microsoft-outlook-calendar.md): Connect to Microsoft Outlook Calendar to sync your calendar data
+- [Microsoft SharePoint](https://docs.endgame.io/integrations/microsoft-sharepoint.md): Connect Microsoft SharePoint to sync document libraries to Endgame
+- [Microsoft Teams](https://docs.endgame.io/integrations/microsoft-teams.md): Connect Microsoft Teams to sync account channel data to Endgame
+- [Notion](https://docs.endgame.io/integrations/notion.md): Connect Notion to sync team content as knowledge
+- [Salesforce](https://docs.endgame.io/integrations/salesforce.md): Seamless integration with Salesforce for real-time account data
+- [Salesforce Essentials](https://docs.endgame.io/integrations/salesforce-essentials-for-admins.md): Focus on the basics that enable intelligent analysis without overthinking your Salesforce setup
+- [Salesforce via Snowflake](https://docs.endgame.io/integrations/salesforce-via-snowflake.md): Give Endgame read access to your Salesforce data in Snowflake
+- [Seismic](https://docs.endgame.io/integrations/seismic.md): Connect Seismic to sync sales enablement content as knowledge
+- [Slack](https://docs.endgame.io/integrations/slack.md): Connect Slack channels to accounts for seamless conversation tracking
+- [Snowflake](https://docs.endgame.io/integrations/snowflake.md): Connect Snowflake tables to Endgame
+- [Zoom](https://docs.endgame.io/integrations/zoom.md): Process Zoom call recordings and gain insights from your meetings
+- [Import Documents](https://docs.endgame.io/knowledge/file-upload.md): Adding contextual knowledge to your chat responses
+- [Google Drive Troubleshooting](https://docs.endgame.io/knowledge/google-drive-troubleshooting.md): Updating Google workspace permissions to allow connection with Endgame
+- [Sales Knowledge: What to Connect](https://docs.endgame.io/knowledge/knowledge-basics-for-admins.md): Connect the right sales content so Endgame can leverage it when answering questions
+- [Navigating Endgame](https://docs.endgame.io/navigating-endgame.md): Learn how to navigate and use Endgame's features for deep customer understanding
+- [Application](https://docs.endgame.io/platform.md): Access the Endgame platform
+- [Query Your Book](https://docs.endgame.io/query-your-book.md): Ask questions across all your accounts from the homepage
+- [Rules 101](https://docs.endgame.io/rules/rules-101.md): Use rules to give Endgame specific instructions for how to behave in your organization's context
+- [Quickstart](https://docs.endgame.io/skills/quickstart.md): A quick start guide to create and manage global skills in Endgame
+- [Skills: Composing Skills](https://docs.endgame.io/skills/skills-101.md)
+- [Status](https://docs.endgame.io/status.md): Check Endgame system status
+- [Privacy](https://docs.endgame.io/trust/privacy.md): Privacy policy and data deletion requests
+- [Security](https://docs.endgame.io/trust/security.md): Learn about Endgame's security practices and certifications
+- [User Management](https://docs.endgame.io/user-management.md): Control which users have what access to Endgame
+- [Vulnerability Disclosure Policy](https://docs.endgame.io/vdp.md): Endgame Labs, Inc.'s Vulnerability Disclosure Policy
+- [Your First 10 Minutes](https://docs.endgame.io/your-first-10-minutes.md): Get to your first insight in one session
+
+## OpenAPI Specs
+
+- [openapi](https://docs.endgame.io/api-reference/openapi.json)

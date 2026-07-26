@@ -1,0 +1,31 @@
+generated: '2026-07-19'
+method: searched
+source: https://docs.endgame.io/changelog
+scheme: dated
+current: '2026-06-12'
+window: recent
+entries:
+- date: '2026-06-12'
+  breaking: false
+  highlights: SharePoint browsing through full folder hierarchy; fixes to file removal and unlinking synced Knowledge Files.
+- date: '2026-06-02'
+  breaking: false
+  highlights: MCP session data (Total MCP Sessions column) surfaced alongside message data in the Team Members / Usage table.
+- date: '2026-06-01'
+  breaking: false
+  highlights: Seismic integration — sync enablement content and engagement/reporting data as knowledge.
+- date: '2026-05-28'
+  breaking: false
+  highlights: Connect Google or Outlook calendar during onboarding for accurate meeting context.
+- date: '2026-05-26'
+  breaking: false
+  highlights: Clari Copilot integration — sync call recordings and transcripts.
+- date: '2026-05-19'
+  breaking: false
+  highlights: Highspot integration — sync sales enablement content from Spots.
+- date: '2026-05-15'
+  breaking: false
+  highlights: Endgame MCP Server open beta — connect Claude/ChatGPT to org revenue intelligence.
+- date: '2026-04-06'
+  breaking: false
+  highlights: Microsoft Teams and Microsoft SharePoint integrations added.

@@ -1,0 +1,17 @@
+generated: '2026-07-19'
+method: searched
+source: https://docs.endgame.io/api-reference/endpoints#rate-limits
+docs: https://docs.endgame.io/api-reference/endpoints#rate-limits
+signal:
+  http_status: 429
+  error_code: RATE_LIMITED
+  note: Treat 429 as a signal to reduce request rate across the entire organization.
+rate_limits:
+- scope: organization
+  limit_count: 10000
+  window: day
+  tier: beta-default
+  note: >-
+    Default quota is 10,000 requests per organization per day during beta; subject
+    to change after beta. Per-plan limits vary; contact an Endgame administrator to
+    review an organization's current limits.

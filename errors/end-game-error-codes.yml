@@ -1,0 +1,53 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/end-game-openapi.json
+docs: https://docs.endgame.io/api-reference/endpoints#errors
+format: custom
+envelope:
+  shape: '{ "error": { "code", "message", "trace_id" } }'
+  code_field: error.code
+  message_field: error.message
+  trace_field: error.trace_id
+  note: >-
+    Every failed request returns the same envelope. `trace_id` uniquely identifies
+    the request and should be included in support requests. This is a custom error
+    envelope, not RFC 9457 application/problem+json.
+errors:
+- code: INVALID_PARAMS
+  status: 400
+  title: Invalid parameters
+  meaning: Request body or query parameters failed validation. Unknown fields are rejected.
+  remediation: Correct the failing field(s) named in `message` and retry.
+  source_operations: [createThread, listThreads, updateThread]
+- code: UNAUTHORIZED
+  status: 401
+  title: Unauthorized
+  meaning: Missing, malformed, or revoked credential in the Authorization header.
+  remediation: 'Send a valid Authorization: Bearer eak_... key or M2M access token.'
+- code: FORBIDDEN
+  status: 403
+  title: Forbidden
+  meaning: >-
+    Credential is valid but not permitted. Either the operation requires a
+    user-scoped API key (org-wide keys and M2M applications cannot mutate threads
+    during beta), or the caller is user-scoped but did not create the thread.
+  remediation: Use a user-scoped API key owned by the thread creator for write operations.
+  source_operations: [createThread, updateThread, deleteThread]
+- code: NOT_FOUND
+  status: 404
+  title: Not found
+  meaning: >-
+    The thread does not exist or is not readable by the caller (threads created by
+    other users under a user-scoped key return 404).
+  remediation: Verify the thread id and that the caller is permitted to read it.
+  source_operations: [getThread]
+- code: RATE_LIMITED
+  status: 429
+  title: Rate limited
+  meaning: Request quota exceeded (beta default 10,000 requests per organization per day).
+  remediation: Treat 429 as a signal to reduce request rate across the entire organization.
+- code: INTERNAL_ERROR
+  status: 500
+  title: Internal error
+  meaning: An unexpected server-side error occurred.
+  remediation: Retry with backoff; include `trace_id` when contacting support.

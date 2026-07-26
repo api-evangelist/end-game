@@ -1,0 +1,12 @@
+generated: '2026-07-19'
+method: generated
+source: openapi/end-game-openapi.json
+skills:
+- file: end-game-ask-endgame.md
+  name: Ask Endgame a revenue question
+  api: openapi/end-game-openapi.json
+  operations: [createThread, getThread]
+- file: end-game-manage-threads.md
+  name: List, rename, and delete Endgame threads
+  api: openapi/end-game-openapi.json
+  operations: [listThreads, updateThread, deleteThread]

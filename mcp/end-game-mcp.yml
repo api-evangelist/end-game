@@ -1,0 +1,28 @@
+generated: '2026-07-19'
+method: searched
+status: published
+source: https://docs.endgame.io/features/mcp-server
+notes: >-
+  Official hosted/remote Endgame MCP Server, in open beta and available to all
+  users. Connects AI assistants (Claude, ChatGPT, Claude Code, Codex CLI) to the
+  organization's revenue intelligence. The available tools are actively developed
+  and subject to change during beta, so exact tool names are not enumerated here;
+  the capabilities below are as described in the provider documentation.
+server:
+  name: endgame
+  transport: http
+  url: https://app.endgame.io/api/v1/mcp
+  auth: oauth-browser-signin
+  install:
+    claude_code: claude mcp add --transport http endgame https://app.endgame.io/api/v1/mcp
+    codex: codex mcp add endgame --url https://app.endgame.io/api/v1/mcp
+capabilities:
+- Search interaction history across CRM records, meeting transcripts, emails, and Slack
+- Look up accounts
+- Find stakeholders / champions and buyers
+- Query the connected data warehouse
+- Surface account and deal insights
+related_rest_operations:
+- source_operation: openapi/end-game-openapi.json#createThread
+- source_operation: openapi/end-game-openapi.json#listThreads
+- source_operation: openapi/end-game-openapi.json#getThread

@@ -1,0 +1,14 @@
+{
+  "provider": "end-game",
+  "sources": [
+    "end-game-threads-api-openapi.yml"
+  ],
+  "outputs": [
+    "end-game-threads-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

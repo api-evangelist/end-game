@@ -1,0 +1,47 @@
+generated: '2026-07-19'
+method: searched
+source: https://docs.endgame.io/api-reference/endpoints
+docs:
+- https://docs.endgame.io/api-reference/authentication
+- https://docs.endgame.io/api-reference/endpoints
+authentication:
+  style: bearer
+  header: Authorization
+  formats:
+  - api-key (eak_ prefix, Personal or Org-wide scope)
+  - WorkOS M2M access token (client_credentials grant)
+  ref: authentication/end-game-authentication.yml
+idempotency:
+  supported: false
+  note: >-
+    No idempotency-key header is documented for the public API. Thread creation is
+    a POST that triggers asynchronous assistant generation; callers poll the thread
+    status rather than retrying idempotently.
+pagination:
+  style: cursor
+  request_params:
+  - limit (integer 1-100, default 25)
+  - cursor (opaque, from previous response nextCursor)
+  response_fields:
+  - nextCursor (opaque; null when no more pages)
+  - truncated (true when org has more threads than the pagination window can walk)
+  filtering:
+  - accountId (optional filter on listThreads)
+versioning:
+  scheme: uri-path
+  current: v1
+  base_path: /api/v1
+async_model:
+  note: >-
+    Assistant responses generate asynchronously. After createThread, poll
+    getThread until status.state is `idle` (success) or `error`.
+request_tracing:
+  field: error.trace_id
+  note: Every error envelope carries a trace_id to include in support requests.
+error_envelope:
+  ref: errors/end-game-error-codes.yml
+  shape: '{ "error": { "code", "message", "trace_id" } }'
+rate_limiting:
+  ref: rate-limits/end-game-rate-limits.yml
+  signal: HTTP 429 with error.code RATE_LIMITED
+  default_quota: 10000 requests per organization per day (beta)
