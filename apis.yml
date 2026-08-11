@@ -93,7 +93,7 @@ common:
 - type: MCPServer
   url: mcp/end-game-mcp.yml
 - type: OpenAPI
-  url: openapi/end-game-openapi.json
+  url: openapi/_original/end-game-openapi.json
 - type: LLMsTxt
   url: llms/end-game-llms.txt
 - type: ChangeLog
