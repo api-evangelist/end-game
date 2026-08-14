@@ -37,7 +37,7 @@ x-tier-reason: enriched-from-developer-docs
 x-legal-entity: Endgame Labs, Inc.
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-19'
+modified: '2026-08-13'
 tags:
 - Company
 - Sales
@@ -52,7 +52,12 @@ tags:
 apis:
 - aid: end-game:end-game-threads-api
   name: Endgame Threads API
-  description: The Threads API from Endgame — 2 operation(s) for threads.
+  description: >-
+    The public Threads API from Endgame — 5 operations (create, get, list, rename,
+    delete) rooted at /api/v1 on https://app.endgame.io, authenticated with a Bearer
+    eak_ API key or a WorkOS M2M access token. Threads are the conversational unit
+    behind Endgame Chat: POST a natural-language prompt, then poll the thread until
+    the assistant's asynchronous response reaches status.state idle or error.
   humanURL: https://docs.endgame.io/api-reference/introduction
   baseURL: https://app.endgame.io
   tags:
@@ -60,8 +65,13 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/end-game-threads-api-openapi.yml
+  - type: OpenAPI
+    name: Endgame Public API (spec served live at /api/v1/openapi.json)
+    url: openapi/_original/end-game-public-api-served-openapi.json
   - type: Documentation
     url: https://docs.endgame.io/api-reference/introduction
+  - type: APIReference
+    url: https://docs.endgame.io/api-reference/endpoints
   - type: Authentication
     url: https://docs.endgame.io/api-reference/authentication
 maintainers:
@@ -99,7 +109,7 @@ common:
 - type: ChangeLog
   url: https://docs.endgame.io/changelog
 - type: StatusPage
-  url: https://docs.endgame.io/status
+  url: https://status.endgame.io
 - type: Support
   url: https://docs.endgame.io/contact
 - type: Blog
@@ -134,8 +144,36 @@ common:
   url: changelog/end-game-changelog.yml
 - type: AgentSkill
   url: skills/_index.yml
+- type: AgentSkill
+  name: Endgame (provider-published Agent Skill)
+  url: skills/end-game-published-skill.md
+- type: AgentCard
+  url: a2a/end-game-a2a.yml
+- type: WellKnown
+  url: well-known/end-game-well-known.yml
+- type: OAuthScopes
+  url: scopes/end-game-scopes.yml
+- type: Packages
+  url: packages/end-game-packages.yml
+- type: CLI
+  url: cli/end-game-cli.yml
+- type: ToolCrosswalk
+  url: mcp/end-game-tool-crosswalk.yml
+- type: Plans
+  url: plans/end-game-plans-pricing.yml
+- type: GitHubOrganization
+  url: https://github.com/Endgame-Labs
+- type: SourceCode
+  name: Endgame CLI
+  url: https://github.com/Endgame-Labs/endgame-cli
+- type: TrustCenter
+  name: Endgame trust center (Drata)
+  url: https://app.drata.com/trust/9cbf820f-0c38-11ee-865f-029d78a187d9
+- type: LLMsTxt
+  name: Endgame website llms.txt
+  url: llms/end-game-website-llms.txt
 x-enrichment:
-  date: '2026-07-19'
-  status: backfilled
+  date: '2026-08-13'
+  status: enriched
+  artifacts_added: 13
   pass: local-v1
-  note: backfilled from .gitignore signal + verified work evidence
