@@ -1,0 +1,73 @@
+generated: '2026-08-13'
+method: searched
+source: https://docs.endgame.io/features/cli
+docs: https://docs.endgame.io/features/cli
+name: endgame
+summary: >-
+  The Endgame CLI is a first-party command-line client for the Endgame MCP endpoint.
+  It calls Endgame tools directly from a terminal with no AI assistant in the loop,
+  which makes it the scriptable projection of the same tool surface Claude and ChatGPT
+  reach over MCP. It is a Go binary built from the public Endgame-Labs/endgame-cli
+  repository.
+repository: https://github.com/Endgame-Labs/endgame-cli
+language: go
+license: MIT
+package_ref: packages/end-game-packages.yml
+backs: https://app.endgame.io/api/v1/mcp
+install:
+- method: source
+  steps: |
+    git clone https://github.com/Endgame-Labs/endgame-cli.git
+    cd endgame-cli
+    ./install.sh
+  note: >-
+    install.sh builds the binary and installs to /usr/local/bin, falling back to
+    ~/.local/bin when that is not writable. A custom directory can be passed:
+    ./install.sh ~/bin. Go must already be installed. There is no published
+    package-manager install (no brew, no npm, no go install of a tagged version).
+authentication:
+  command: endgame auth login
+  mechanism: oauth
+  modes:
+  - {mode: browser, note: 'opens a browser on this machine and completes the OAuth flow on a localhost callback'}
+  - {mode: device, note: 'displays a device code entered in a browser on any device — for remote servers or separate browser sessions'}
+  flags:
+  - --mode browser|device
+  - --callback-port <port>
+  remote_note: >-
+    For browser mode on a remote server the docs instruct forwarding the callback
+    port first — ssh -L 8788:127.0.0.1:8788 <server> — then
+    endgame auth login --mode browser --callback-port 8788.
+  token_store: ~/.endgame-auth.json
+  token_lifecycle: >-
+    Tokens refresh automatically. The CLI reuses the cached access token until it
+    nears expiry, refreshes once before the request, and retries once on an
+    authentication error. No auth environment variables are supported.
+commands:
+- command: endgame auth
+  description: Log in, check status, and manage authentication.
+  subcommands: [login, status]
+- command: endgame tools
+  description: List and invoke Endgame tools.
+  subcommands: [--help, sync]
+  note: >-
+    Tools are discovered from the authenticated account at login and cached locally.
+    The cache refreshes automatically after login and in the background when it is
+    more than 12 hours old; endgame tools sync forces a refresh. Because discovery is
+    per-account, the exact tool list a user sees is entitlement-dependent.
+- command: endgame whoami
+  description: Show the authenticated user.
+- command: endgame version
+  description: Print the CLI version, commit, and build date.
+invocation:
+  pattern: endgame tools <tool_name> --json '<json input>'
+  stdin_supported: true
+  examples:
+  - endgame tools search_graph_entities --json '{"query":"Acme Corp"}'
+  - endgame tools find_graph_person --json '{"query":"Sarah Chen"}'
+  - endgame tools list_my_accounts --json '{}'
+  - endgame tools get_graph_entities --json '{...}'
+  - echo '{"query":"Acme Corp"}' | endgame tools search_graph_entities
+configuration:
+- {env: ENDGAME_TIMEOUT_SECONDS, description: Request timeout override.}
+support: support@endgame.io

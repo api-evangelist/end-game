@@ -1,0 +1,24 @@
+generated: '2026-08-13'
+method: searched
+source: https://www.endgame.io/
+plan_count: 0
+currency: null
+plans: []
+note: >-
+  Endgame publishes no pricing page and no plan tiers. https://www.endgame.io/pricing,
+  /plans and /demo all return 404, and the marketing site's own navigation (about,
+  blog, case-studies, careers, signup, privacy, tou, acceptable-use) contains no
+  pricing route. The only commercial entry points are the self-serve signup at
+  https://www.endgame.io/signup and the application login at
+  https://app.endgame.io/login. Nothing in the developer documentation attaches a
+  price, quota tier, or overage to API or MCP access — the REST API's only published
+  limit is a flat open-beta quota of 10,000 requests per organization per day
+  (rate-limits/end-game-rate-limits.yml), described as a default subject to change
+  and adjustable by contacting support rather than by choosing a plan. Treat pricing
+  as sales-negotiated enterprise pricing that is not disclosed publicly.
+evidence:
+- {url: 'https://www.endgame.io/pricing', status: 404}
+- {url: 'https://www.endgame.io/plans', status: 404}
+- {url: 'https://www.endgame.io/demo', status: 404}
+- {url: 'https://www.endgame.io/', status: 200, note: 'homepage link inventory contains no pricing route'}
+- {url: 'https://www.endgame.io/signup', status: 200, note: 'self-serve signup, no price shown'}

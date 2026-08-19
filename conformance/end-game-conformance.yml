@@ -1,9 +1,11 @@
-generated: '2026-07-19'
+generated: '2026-08-13'
 method: searched
 source: https://docs.endgame.io/trust/security
 docs:
 - https://docs.endgame.io/api-reference/authentication
 - https://docs.endgame.io/trust/security
+- https://app.endgame.io/.well-known/oauth-authorization-server
+- https://app.endgame.io/.well-known/oauth-protected-resource
 standards:
 - id: http-bearer-auth
   conforms: true
@@ -11,12 +13,45 @@ standards:
 - id: oauth2-client-credentials
   conforms: true
   evidence: WorkOS M2M applications exchange credentials via the client_credentials grant (docs)
+- id: rfc8414-oauth-authorization-server-metadata
+  conforms: true
+  evidence: 'https://app.endgame.io/.well-known/oauth-authorization-server returns 200 with issuer, authorization/token/jwks/introspection/registration endpoints (probed 2026-08-13)'
+- id: rfc9728-oauth-protected-resource-metadata
+  conforms: true
+  evidence: 'https://app.endgame.io/.well-known/oauth-protected-resource returns 200 declaring https://app.endgame.io/api/v1/mcp as the protected resource (probed 2026-08-13)'
+- id: rfc7636-pkce
+  conforms: true
+  evidence: code_challenge_methods_supported [S256] in the authorization-server metadata
+- id: rfc8628-oauth-device-authorization-grant
+  conforms: true
+  evidence: 'device_authorization_endpoint published; endgame auth login --mode device documented'
+- id: rfc7591-dynamic-client-registration
+  conforms: true
+  evidence: registration_endpoint published and client_id_metadata_document_supported true
+- id: oidc-discovery
+  conforms: false
+  evidence: 'openid/profile/email scopes are advertised, but /.well-known/openid-configuration returns 404 on every Endgame host (probed 2026-08-13)'
+- id: mcp-authorization
+  conforms: true
+  evidence: 'unauthenticated tools/list returns 401 with WWW-Authenticate: Bearer error="invalid_token", resource_metadata=... — the MCP authorization spec challenge'
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: 'no /.well-known/security.txt on any host, although a VDP with security@endgame.io is published at docs.endgame.io/vdp'
+- id: a2a-agent-card
+  conforms: true
+  evidence: 'https://docs.endgame.io/.well-known/agent-card.json returns a conformant A2A 1.0.0 card (capabilities object, protocolVersion 0.3, skills array) — a2a/end-game-a2a.yml'
 - id: rfc9457-problem-details
   conforms: false
   evidence: 'uses a custom { error: { code, message, trace_id } } envelope, not application/problem+json'
 - id: cursor-pagination
   conforms: true
   evidence: listThreads uses opaque cursor + nextCursor + limit
+- id: idempotency-keys
+  conforms: false
+  evidence: no idempotency-key header documented for any write operation (conventions/end-game-conventions.yml)
+- id: rfc8594-deprecation-sunset
+  conforms: false
+  evidence: no deprecation policy and no Sunset/Deprecation header documented (lifecycle/end-game-lifecycle.yml)
 - id: soc2-type-ii
   conforms: true
   evidence: SOC 2 Type II certification (trust/security page + Drata trust center)

@@ -1,6 +1,6 @@
 generated: '2026-07-19'
 method: generated
-source: openapi/end-game-openapi.json
+source: openapi/_original/end-game-openapi.json
 description: Recommended x-agentic-access execution contracts, classified heuristically from
   the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
   audience per deployment. See research/curity/agentic-governance/.

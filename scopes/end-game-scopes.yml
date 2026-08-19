@@ -1,0 +1,72 @@
+generated: '2026-08-13'
+method: probed
+source: https://app.endgame.io/.well-known/oauth-authorization-server
+docs: https://docs.endgame.io/api-reference/authentication
+raw: well-known/end-game-oauth-authorization-server.json
+summary: >-
+  Endgame's OAuth surface is authorization-server metadata (RFC 8414) served at
+  app.endgame.io and delegated to WorkOS at login.endgame.io. The advertised scopes
+  are the four OIDC identity scopes only — there are no product-level or
+  resource-level scopes. Authorization to Endgame data is not expressed as OAuth
+  scopes at all: it is decided by the PRINCIPAL behind the credential (a specific
+  user, or the org-wide service identity), as documented on the API authentication
+  page. The REST OpenAPI declares a single http/bearer scheme and no oauth2 scheme,
+  so nothing in the spec carries scopes; this file is derived from the live metadata
+  document rather than from the spec.
+schemes:
+- name: WorkOS OAuth 2.0 (Endgame-provisioned)
+  source: https://app.endgame.io/.well-known/oauth-authorization-server
+  issuer: https://app.endgame.io
+  authorization_endpoint: https://login.endgame.io/oauth2/authorize
+  token_endpoint: https://login.endgame.io/oauth2/token
+  device_authorization_endpoint: https://login.endgame.io/oauth2/device_authorization
+  introspection_endpoint: https://login.endgame.io/oauth2/introspection
+  registration_endpoint: https://login.endgame.io/oauth2/register
+  jwks_uri: https://login.endgame.io/oauth2/jwks
+  grant_types:
+  - authorization_code
+  - refresh_token
+  - urn:ietf:params:oauth:grant-type:device_code
+  - client_credentials
+  code_challenge_methods: [S256]
+  token_endpoint_auth_methods: [none, client_secret_post, client_secret_basic]
+  dynamic_client_registration: true
+  client_id_metadata_document_supported: true
+scopes:
+- scope: openid
+  description: OpenID Connect — request an ID token for the authenticating user.
+  flows: [authorizationCode, deviceCode]
+  sources: [https://app.endgame.io/.well-known/oauth-authorization-server]
+- scope: profile
+  description: Basic profile claims for the authenticating user.
+  flows: [authorizationCode, deviceCode]
+  sources: [https://app.endgame.io/.well-known/oauth-authorization-server]
+- scope: email
+  description: Email address of the authenticating user.
+  flows: [authorizationCode, deviceCode]
+  sources: [https://app.endgame.io/.well-known/oauth-authorization-server]
+- scope: offline_access
+  description: Issue a refresh token so the client can renew access without re-prompting.
+  flows: [authorizationCode, deviceCode]
+  sources: [https://app.endgame.io/.well-known/oauth-authorization-server]
+consumers:
+- surface: MCP server
+  endpoint: https://app.endgame.io/api/v1/mcp
+  note: >-
+    The MCP endpoint is a protected resource under this authorization server
+    (well-known/end-game-oauth-protected-resource.json). An unauthenticated
+    tools/list returns 401 with
+    WWW-Authenticate: Bearer error="invalid_token", pointing at
+    https://app.endgame.io/api/v1/mcp/.well-known/oauth-protected-resource.
+- surface: Endgame CLI
+  note: endgame auth login runs the authorization_code (browser) or device_code flow.
+- surface: M2M applications
+  note: >-
+    client_credentials grant against https://login.endgame.io/oauth2/token, returning
+    a JWT used as the REST Bearer token. Endgame provisions the WorkOS OAuth client.
+authorization_model:
+  expressed_as: principal, not scope
+  principals:
+  - {principal: user, credential: 'personal API key (eak_*) or user OAuth token', capabilities: 'create/list/get/rename/delete own threads plus read every org-published thread'}
+  - {principal: org-wide service identity, credential: 'org-wide API key or M2M application token', capabilities: 'read-only — list and fetch org-published threads; every mutation returns 403 FORBIDDEN'}
+  docs: https://docs.endgame.io/api-reference/authentication#scope-and-permissions

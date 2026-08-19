@@ -1,0 +1,921 @@
+{
+  "item": [
+    {
+      "id": "ea9d3d28-97c0-4be4-a1da-f102f82b61f9",
+      "name": "Threads",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a7225a0a-c5a4-40c8-a4d1-daa4854286c8",
+          "name": "Create a thread",
+          "request": {
+            "name": "Create a thread",
+            "description": {
+              "content": "Creates a new thread in the caller's organization. Requires a user-scoped API key; org-wide API keys and M2M applications receive `403 FORBIDDEN` during beta. The `prompt` is required -- it's persisted as the first user message and triggers the assistant's response to generate asynchronously. Poll `GET /api/v1/threads/{id}` until the derived `status.state` is `idle` (or `error`).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "threads"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"prompt\": \"<string>\",\n  \"title\": \"<string>\",\n  \"accountId\": \"<string>\",\n  \"secondaryId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ad586025-ff4f-481d-9815-64fe8d44aa5d",
+              "name": "Thread created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "threads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"prompt\": \"What accounts does my team own?\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"thread\": {\n    \"id\": \"thr_01HZY6P8RB4K5C7X9E2N8MDQ4T\",\n    \"title\": \"What accounts does my team own?\",\n    \"createdAt\": \"2026-04-22T14:32:10.000Z\",\n    \"updatedAt\": \"2026-04-22T14:35:02.000Z\",\n    \"accountId\": \"0018b00000abCdEfGhI\",\n    \"secondaryId\": \"string\",\n    \"published\": false,\n    \"deleted\": false,\n    \"threadUrl\": \"https://app.endgame.io/threads/thr_01HZY6P8RB4K5C7X9E2N8MDQ4T\"\n  },\n  \"messageId\": \"msg_01HZY6P8RB4K5C7X9E2N8MDQ4V\",\n  \"responseMessageId\": \"msg_01HZY6P8RB4K5C7X9E2N8MDQ4W\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b147cd77-1191-4e14-8c5f-a5baec628c8c",
+              "name": "Request body or query parameters failed validation. See [Errors](/api-reference/endpoints#errors) for the full error envelope and code list.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "threads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"prompt\": \"What accounts does my team own?\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"INVALID_PARAMS\",\n    \"message\": \"prompt: String must contain at least 1 character(s)\",\n    \"trace_id\": \"01HZY6P8RB4K5C7X9E2N8MDQ4T\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9a175775-87a8-486f-9bed-b1066858b977",
+              "name": "Credential is valid but not permitted. Either the operation requires a user-scoped API key (org-wide credentials cannot mutate threads during beta), or the caller is user-scoped but did not create the thread. See [Errors](/api-reference/endpoints#errors) for the full error envelope.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "threads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"prompt\": \"What accounts does my team own?\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"INVALID_PARAMS\",\n    \"message\": \"prompt: String must contain at least 1 character(s)\",\n    \"trace_id\": \"01HZY6P8RB4K5C7X9E2N8MDQ4T\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c122270b-0006-4a5e-9ae3-1034a7df999f",
+          "name": "List threads",
+          "request": {
+            "name": "List threads",
+            "description": {
+              "content": "Lists threads visible to the caller, ordered by most recent activity first (`updatedAt` when present, otherwise `createdAt`). Personal keys see their own threads plus every org-published thread; the org-wide principal (shared by org-wide API keys and M2M applications) sees every org-published thread.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "threads"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "25",
+                  "description": "Maximum number of threads to return (1-100, default 25)."
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "Opaque cursor from a previous response's `nextCursor`. Omit for the first page."
+                },
+                {
+                  "disabled": false,
+                  "key": "accountId",
+                  "value": "<string>",
+                  "description": "Optional filter: only return threads associated with this account ID."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "12ae336c-afa9-4217-89cd-dbb7c7986037",
+              "name": "A page of threads.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "threads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accountId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"threads\": [\n    {\n      \"id\": \"thr_01HZY6P8RB4K5C7X9E2N8MDQ4T\",\n      \"title\": \"What accounts does my team own?\",\n      \"createdAt\": \"2026-04-22T14:32:10.000Z\",\n      \"updatedAt\": \"2026-04-22T14:35:02.000Z\",\n      \"accountId\": \"0018b00000abCdEfGhI\",\n      \"secondaryId\": \"string\",\n      \"published\": false,\n      \"deleted\": false,\n      \"threadUrl\": \"https://app.endgame.io/threads/thr_01HZY6P8RB4K5C7X9E2N8MDQ4T\"\n    },\n    {\n      \"id\": \"thr_01HZY6P8RB4K5C7X9E2N8MDQ4T\",\n      \"title\": \"What accounts does my team own?\",\n      \"createdAt\": \"2026-04-22T14:32:10.000Z\",\n      \"updatedAt\": \"2026-04-22T14:35:02.000Z\",\n      \"accountId\": \"0018b00000abCdEfGhI\",\n      \"secondaryId\": \"string\",\n      \"published\": false,\n      \"deleted\": false,\n      \"threadUrl\": \"https://app.endgame.io/threads/thr_01HZY6P8RB4K5C7X9E2N8MDQ4T\"\n    }\n  ],\n  \"nextCursor\": \"MjAyNi0wNC0yMlQxNDozNTowMi4wMDBafHRocl8wMUhaWTZQOFJCNEs1QzdYOUUyTjhNRFE0VA==\",\n  \"truncated\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "044f7a62-a48a-4b22-a09f-ab164f1b425e",
+              "name": "Request body or query parameters failed validation. See [Errors](/api-reference/endpoints#errors) for the full error envelope and code list.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "threads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accountId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"INVALID_PARAMS\",\n    \"message\": \"prompt: String must contain at least 1 character(s)\",\n    \"trace_id\": \"01HZY6P8RB4K5C7X9E2N8MDQ4T\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "329b08f7-6fed-4f1f-bd81-4303d36f93db",
+          "name": "Get a thread",
+          "request": {
+            "name": "Get a thread",
+            "description": {
+              "content": "Retrieves a thread, its messages, and its derived run status. Callers can only fetch threads they are permitted to read -- threads created by other users under a user-scoped key return `404 NOT_FOUND`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "threads",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Thread identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f93b530e-f54f-46f3-ac47-0a613c09536e",
+              "name": "Thread, messages, and derived status.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "threads",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Thread identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"thread\": {\n    \"id\": \"thr_01HZY6P8RB4K5C7X9E2N8MDQ4T\",\n    \"title\": \"What accounts does my team own?\",\n    \"createdAt\": \"2026-04-22T14:32:10.000Z\",\n    \"updatedAt\": \"2026-04-22T14:35:02.000Z\",\n    \"accountId\": \"0018b00000abCdEfGhI\",\n    \"secondaryId\": \"string\",\n    \"published\": false,\n    \"deleted\": false,\n    \"threadUrl\": \"https://app.endgame.io/threads/thr_01HZY6P8RB4K5C7X9E2N8MDQ4T\"\n  },\n  \"messages\": [\n    {\n      \"id\": \"msg_01HZY6P8RB4K5C7X9E2N8MDQ4U\",\n      \"threadId\": \"thr_01HZY6P8RB4K5C7X9E2N8MDQ4T\",\n      \"role\": \"assistant\",\n      \"content\": \"Your team owns 42 accounts. The five largest by ARR are...\",\n      \"status\": \"completed\",\n      \"createdAt\": \"2026-04-22T14:32:11.000Z\",\n      \"completedAt\": \"2026-04-22T14:32:18.000Z\",\n      \"steps\": [\n        {\n          \"description\": \"Looking up accounts owned by your team\"\n        },\n        {\n          \"description\": \"Ranking by annualized revenue\"\n        }\n      ],\n      \"sources\": [\n        {\n          \"key_0\": \"string\"\n        },\n        {\n          \"key_0\": \"string\",\n          \"key_1\": 3443.3744584534043,\n          \"key_2\": false,\n          \"key_3\": 8418\n        }\n      ],\n      \"attachments\": [\n        {\n          \"key_0\": 5883,\n          \"key_1\": true\n        },\n        {\n          \"key_0\": 5004\n        }\n      ],\n      \"model\": \"claude-opus-4-7\"\n    },\n    {\n      \"id\": \"msg_01HZY6P8RB4K5C7X9E2N8MDQ4U\",\n      \"threadId\": \"thr_01HZY6P8RB4K5C7X9E2N8MDQ4T\",\n      \"role\": \"assistant\",\n      \"content\": \"Your team owns 42 accounts. The five largest by ARR are...\",\n      \"status\": \"completed\",\n      \"createdAt\": \"2026-04-22T14:32:11.000Z\",\n      \"completedAt\": \"2026-04-22T14:32:18.000Z\",\n      \"steps\": [\n        {\n          \"description\": \"Looking up accounts owned by your team\"\n        },\n        {\n          \"description\": \"Ranking by annualized revenue\"\n        }\n      ],\n      \"sources\": [\n        {\n          \"key_0\": false,\n          \"key_1\": \"string\"\n        },\n        {\n          \"key_0\": \"string\",\n          \"key_1\": 3806.468148148494\n        }\n      ],\n      \"attachments\": [\n        {\n          \"key_0\": true\n        },\n        {\n          \"key_0\": 5452.1136577951465,\n          \"key_1\": 8116.823664533485\n        }\n      ],\n      \"model\": \"claude-opus-4-7\"\n    }\n  ],\n  \"status\": {\n    \"state\": \"idle\",\n    \"activeMessageId\": \"string\",\n    \"latestUpdate\": \"string\",\n    \"stepCount\": 0\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6161d560-a68e-486e-839f-a9b52e8382d6",
+          "name": "Update a thread",
+          "request": {
+            "name": "Update a thread",
+            "description": {
+              "content": "Renames a thread. Only `title` is writable. Requires a user-scoped API key; org-wide API keys and M2M applications receive `403 FORBIDDEN` during beta. Users can only rename threads they created -- attempts to rename another user's thread also return `403 FORBIDDEN`, even when the thread is published.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "threads",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Thread identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ec6e648d-8c24-4655-8b47-824dfdb38017",
+              "name": "Updated thread.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "threads",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Thread identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Book of business review — Q2\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"thread\": {\n    \"id\": \"thr_01HZY6P8RB4K5C7X9E2N8MDQ4T\",\n    \"title\": \"What accounts does my team own?\",\n    \"createdAt\": \"2026-04-22T14:32:10.000Z\",\n    \"updatedAt\": \"2026-04-22T14:35:02.000Z\",\n    \"accountId\": \"0018b00000abCdEfGhI\",\n    \"secondaryId\": \"string\",\n    \"published\": false,\n    \"deleted\": false,\n    \"threadUrl\": \"https://app.endgame.io/threads/thr_01HZY6P8RB4K5C7X9E2N8MDQ4T\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "be078912-6532-4ccb-821d-45cfc74ce31e",
+              "name": "Request body or query parameters failed validation. See [Errors](/api-reference/endpoints#errors) for the full error envelope and code list.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "threads",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Thread identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Book of business review — Q2\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"INVALID_PARAMS\",\n    \"message\": \"prompt: String must contain at least 1 character(s)\",\n    \"trace_id\": \"01HZY6P8RB4K5C7X9E2N8MDQ4T\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "596a8630-b62c-47ce-ace4-0e54dfb2b401",
+              "name": "Credential is valid but not permitted. Either the operation requires a user-scoped API key (org-wide credentials cannot mutate threads during beta), or the caller is user-scoped but did not create the thread. See [Errors](/api-reference/endpoints#errors) for the full error envelope.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "threads",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Thread identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Book of business review — Q2\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"INVALID_PARAMS\",\n    \"message\": \"prompt: String must contain at least 1 character(s)\",\n    \"trace_id\": \"01HZY6P8RB4K5C7X9E2N8MDQ4T\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bfe45fce-4380-4174-9c5c-e6697bd4d19b",
+          "name": "Delete a thread",
+          "request": {
+            "name": "Delete a thread",
+            "description": {
+              "content": "Soft-deletes a thread. The record is preserved server-side but will no longer appear in `GET /api/v1/threads` or be readable via `GET /api/v1/threads/{id}`. Requires a user-scoped API key; org-wide API keys and M2M applications receive `403 FORBIDDEN` during beta. Users can only delete threads they created.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "threads",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Thread identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b5bfab97-625e-4b32-aec0-3fbe499ee157",
+              "name": "Deletion acknowledged.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "threads",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Thread identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"thr_01HZY6P8RB4K5C7X9E2N8MDQ4T\",\n  \"deleted\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d6a76c36-d07a-43f0-8193-56f74f9a4c64",
+              "name": "Credential is valid but not permitted. Either the operation requires a user-scoped API key (org-wide credentials cannot mutate threads during beta), or the caller is user-scoped but did not create the thread. See [Errors](/api-reference/endpoints#errors) for the full error envelope.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "threads",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Thread identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"INVALID_PARAMS\",\n    \"message\": \"prompt: String must contain at least 1 character(s)\",\n    \"trace_id\": \"01HZY6P8RB4K5C7X9E2N8MDQ4T\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.endgame.io",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "e4d30d5e-fce4-40ad-9afb-c2f7a5495d4c",
+    "name": "Endgame Public Threads API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Create and manage Endgame threads over HTTPS.",
+      "type": "text/plain"
+    }
+  }
+}

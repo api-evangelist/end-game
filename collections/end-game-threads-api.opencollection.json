@@ -1,0 +1,131 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Endgame Public Threads API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Threads",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List threads",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.endgame.io/api/v1/threads",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of threads to return (1-100, default 25)."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Opaque cursor from a previous response's `nextCursor`. Omit for the first page."
+              },
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "query",
+                "description": "Optional filter: only return threads associated with this account ID."
+              }
+            ]
+          },
+          "docs": "Lists threads visible to the caller, ordered by most recent activity first (`updatedAt` when present, otherwise `createdAt`). Personal keys see their own threads plus every org-published thread; the org-wide principal (shared by org-wide API keys and M2M applications) sees every org-published thread."
+        },
+        {
+          "info": {
+            "name": "Create a thread",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.endgame.io/api/v1/threads",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new thread in the caller's organization. Requires a user-scoped API key; org-wide API keys and M2M applications receive `403 FORBIDDEN` during beta. The `prompt` is required -- it's persisted as the first user message and triggers the assistant's response to generate asynchronously. Poll `GET /api/v1/threads/{id}` until the derived `status.state` is `idle` (or `error`)."
+        },
+        {
+          "info": {
+            "name": "Get a thread",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.endgame.io/api/v1/threads/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Thread identifier."
+              }
+            ]
+          },
+          "docs": "Retrieves a thread, its messages, and its derived run status. Callers can only fetch threads they are permitted to read -- threads created by other users under a user-scoped key return `404 NOT_FOUND`."
+        },
+        {
+          "info": {
+            "name": "Update a thread",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://app.endgame.io/api/v1/threads/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Thread identifier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Renames a thread. Only `title` is writable. Requires a user-scoped API key; org-wide API keys and M2M applications receive `403 FORBIDDEN` during beta. Users can only rename threads they created -- attempts to rename another user's thread also return `403 FORBIDDEN`, even when the thread is published."
+        },
+        {
+          "info": {
+            "name": "Delete a thread",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://app.endgame.io/api/v1/threads/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Thread identifier."
+              }
+            ]
+          },
+          "docs": "Soft-deletes a thread. The record is preserved server-side but will no longer appear in `GET /api/v1/threads` or be readable via `GET /api/v1/threads/{id}`. Requires a user-scoped API key; org-wide API keys and M2M applications receive `403 FORBIDDEN` during beta. Users can only delete threads they created."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

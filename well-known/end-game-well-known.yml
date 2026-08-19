@@ -1,0 +1,79 @@
+generated: '2026-08-13'
+method: probed
+source: live probe of every Endgame host on 2026-08-13
+summary: >-
+  Two real documents are served from the API host: RFC 8414 OAuth 2.0 Authorization
+  Server Metadata and RFC 9728 OAuth 2.0 Protected Resource Metadata, the pair an MCP
+  client uses to discover how to authorize against https://app.endgame.io/api/v1/mcp.
+  The A2A agent card is served from the docs host and is recorded separately in
+  a2a/end-game-a2a.yml. No security.txt, OpenID Connect discovery document, api-catalog
+  or ai-plugin.json is served on any host.
+hosts:
+- host: https://app.endgame.io
+  role: api + application host (apis.yml baseURL, OpenAPI servers[])
+  documents:
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    content_type: application/json
+    file: end-game-oauth-authorization-server.json
+    spec: RFC 8414
+    note: >-
+      Issuer is https://app.endgame.io; every endpoint is delegated to WorkOS at
+      login.endgame.io. Advertises authorization_code, refresh_token, device_code and
+      client_credentials grants, PKCE S256, dynamic client registration, and the
+      scopes email, offline_access, openid, profile.
+  - path: /.well-known/oauth-protected-resource
+    status: 200
+    content_type: application/json
+    file: end-game-oauth-protected-resource.json
+    spec: RFC 9728
+    note: >-
+      Declares the MCP endpoint https://app.endgame.io/api/v1/mcp as the protected
+      resource and https://app.endgame.io as its authorization server. The MCP
+      endpoint's 401 WWW-Authenticate header points at the per-resource variant
+      https://app.endgame.io/api/v1/mcp/.well-known/oauth-protected-resource.
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
+- host: https://docs.endgame.io
+  role: documentation / developer portal host
+  documents:
+  - path: /.well-known/agent-card.json
+    status: 200
+    content_type: application/json
+    file: ../a2a/end-game-agent-card.json
+    spec: A2A 1.0.0
+    note: Recorded in full in a2a/end-game-a2a.yml (graded conformant).
+  - path: /.well-known/agent-skills/endgame/skill.md
+    status: 200
+    content_type: text/markdown
+    file: ../skills/end-game-published-skill.md
+    note: Provider-published Agent Skill referenced by the agent card's skills[0].url.
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
+- host: https://www.endgame.io
+  role: marketing website (apex endgame.io behaves identically)
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/oauth-protected-resource, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
+security_txt:
+  served: false
+  note: >-
+    No RFC 9116 security.txt on any host, although Endgame does publish a
+    Vulnerability Disclosure Policy at https://docs.endgame.io/vdp with a
+    security@endgame.io contact (see security/end-game-vulnerability-disclosure.yml).
+    Publishing the same contact at /.well-known/security.txt would make it
+    machine-discoverable.

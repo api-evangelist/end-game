@@ -1,7 +1,7 @@
 ---
 name: List, rename, and delete Endgame threads
 description: Page through threads, rename one, and soft-delete another using the public API.
-api: openapi/end-game-openapi.json
+api: openapi/_original/end-game-openapi.json
 operations: [listThreads, updateThread, deleteThread]
 ---
 

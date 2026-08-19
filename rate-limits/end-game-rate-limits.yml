@@ -1,17 +1,37 @@
-generated: '2026-07-19'
+generated: '2026-08-13'
 method: searched
 source: https://docs.endgame.io/api-reference/endpoints#rate-limits
 docs: https://docs.endgame.io/api-reference/endpoints#rate-limits
+limit_count: 1
 signal:
   http_status: 429
   error_code: RATE_LIMITED
-  note: Treat 429 as a signal to reduce request rate across the entire organization.
+  body: '{ "error": { "code": "RATE_LIMITED", "message": "Rate limit exceeded", "trace_id": "..." } }'
+  note: Treat 429 as a signal to reduce request rate across the entire organization, not just the calling credential.
+headers:
+  documented: []
+  observed: []
+  retry_after: false
+  ratelimit_standard: false
+  note: >-
+    Endgame documents NO rate-limit response headers — no X-RateLimit-*, no RFC 9331
+    RateLimit-*, and no Retry-After on 429. A live unauthenticated request to
+    https://app.endgame.io/api/v1/mcp (2026-08-13) returned no rate-limit header of
+    any kind either. An agent therefore cannot see how much of the org-wide quota
+    remains; the only runtime signal is the 429 itself, and the docs' guidance is to
+    back off with exponential delay and jitter. Publishing RateLimit-Limit /
+    RateLimit-Remaining / RateLimit-Reset would be the single highest-value runtime
+    fix on this API.
 rate_limits:
 - scope: organization
+  applies_to: every credential and every endpoint
   limit_count: 10000
   window: day
+  burst: null
   tier: beta-default
   note: >-
-    Default quota is 10,000 requests per organization per day during beta; subject
-    to change after beta. Per-plan limits vary; contact an Endgame administrator to
-    review an organization's current limits.
+    Default quota is 10,000 requests per organization per day during open beta;
+    Endgame states the value is subject to change after beta. Limits are applied at
+    the organization level, NOT per credential — adding API keys does not add quota.
+    Organizations consistently approaching the quota are asked to contact
+    support@endgame.io to review.

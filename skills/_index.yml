@@ -1,12 +1,31 @@
-generated: '2026-07-19'
-method: generated
-source: openapi/end-game-openapi.json
+generated: '2026-08-13'
+method: searched
+source: >-
+  end-game-published-skill.md was fetched verbatim from
+  https://docs.endgame.io/.well-known/agent-skills/endgame/skill.md; the other two
+  were generated from openapi/end-game-threads-api-openapi.yml
 skills:
+- file: end-game-published-skill.md
+  name: Endgame
+  method: searched
+  source: https://docs.endgame.io/.well-known/agent-skills/endgame/skill.md
+  published_by: provider
+  http_status: 200
+  fetched: '2026-08-13'
+  api: https://app.endgame.io/api/v1/mcp
+  note: >-
+    Provider-published Agent Skill, saved verbatim. It is the skill referenced by
+    Endgame's A2A agent card (a2a/end-game-a2a.yml, skills[0].url) and carries
+    Mintlify frontmatter (mintlify-proj endgame, version 1.0). Covers MCP, REST and
+    CLI access paths, when to use each, workflows, gotchas and a verification
+    checklist.
 - file: end-game-ask-endgame.md
   name: Ask Endgame a revenue question
-  api: openapi/end-game-openapi.json
+  method: generated
+  api: openapi/end-game-threads-api-openapi.yml
   operations: [createThread, getThread]
 - file: end-game-manage-threads.md
   name: List, rename, and delete Endgame threads
-  api: openapi/end-game-openapi.json
+  method: generated
+  api: openapi/end-game-threads-api-openapi.yml
   operations: [listThreads, updateThread, deleteThread]

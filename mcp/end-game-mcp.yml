@@ -1,28 +1,89 @@
-generated: '2026-07-19'
+generated: '2026-08-13'
 method: searched
 status: published
 source: https://docs.endgame.io/features/mcp-server
 notes: >-
-  Official hosted/remote Endgame MCP Server, in open beta and available to all
-  users. Connects AI assistants (Claude, ChatGPT, Claude Code, Codex CLI) to the
-  organization's revenue intelligence. The available tools are actively developed
-  and subject to change during beta, so exact tool names are not enumerated here;
-  the capabilities below are as described in the provider documentation.
+  Official hosted/remote Endgame MCP Server, in open beta and available to all users.
+  Connects AI assistants (Claude, ChatGPT, Claude Code, Codex CLI) to the
+  organization's revenue intelligence. Endgame states the tool set is discovered per
+  account and changes during beta — clients are told to use "Refresh Tools List" — so
+  the tools below are the ones Endgame's own documentation names verbatim, not a
+  complete manifest. Live introspection is auth-gated (see probe).
 server:
   name: endgame
   transport: http
   url: https://app.endgame.io/api/v1/mcp
-  auth: oauth-browser-signin
+  auth: oauth
+  auth_detail: >-
+    OAuth 2.0 against the authorization server advertised at
+    https://app.endgame.io/.well-known/oauth-authorization-server (issuer
+    app.endgame.io, endpoints delegated to WorkOS at login.endgame.io). The endpoint
+    is registered as an RFC 9728 protected resource. Browser sign-in for assistant
+    connectors; authorization_code or device_code for the CLI.
   install:
     claude_code: claude mcp add --transport http endgame https://app.endgame.io/api/v1/mcp
+    claude_code_user_scope: claude mcp add --transport http endgame --scope user https://app.endgame.io/api/v1/mcp
     codex: codex mcp add endgame --url https://app.endgame.io/api/v1/mcp
+    claude_connector: Add a custom connector in Claude with the URL https://app.endgame.io/api/v1/mcp (admin adds it org-wide, each user then connects).
+    chatgpt: Create a custom app in ChatGPT with the URL https://app.endgame.io/api/v1/mcp, publish it to the org, then each user enables it.
+deployment:
+  mode: remote
+  endpoint: https://app.endgame.io/api/v1/mcp
+  auth: oauth
+  verified: probed
+  probe: gated
+  checked: '2026-08-13'
+  source: live POST tools/list
+probe:
+  method: POST
+  url: https://app.endgame.io/api/v1/mcp
+  body: '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+  accept: application/json, text/event-stream
+  http_status: 401
+  response: '{"error":"invalid_token","error_description":"No authorization provided"}'
+  www_authenticate: 'Bearer error="invalid_token", resource_metadata="https://app.endgame.io/api/v1/mcp/.well-known/oauth-protected-resource"'
+  checked: '2026-08-13'
+  note: >-
+    The endpoint is live and correctly implements the MCP authorization spec —
+    it answers with an OAuth challenge naming its protected-resource metadata rather
+    than a bare 401. Input schemas for the tools below require an authenticated
+    tools/list and are therefore NOT recorded here; nothing is guessed.
+tools:
+- name: search_graph_entities
+  description: Search the context graph for accounts, people and deals.
+  source: https://docs.endgame.io/features/cli
+  input_schema: unknown-auth-gated
+- name: get_graph_entities
+  description: Retrieve the full record for a graph entity.
+  source: https://docs.endgame.io/features/cli
+  input_schema: unknown-auth-gated
+- name: find_graph_person
+  description: Find a person — stakeholder, champion or buyer — in the context graph.
+  source: https://docs.endgame.io/features/cli
+  input_schema: unknown-auth-gated
+- name: list_my_accounts
+  description: List the accounts owned by the authenticated user.
+  source: https://docs.endgame.io/features/cli
+  input_schema: unknown-auth-gated
 capabilities:
 - Search interaction history across CRM records, meeting transcripts, emails, and Slack
 - Look up accounts
 - Find stakeholders / champions and buyers
 - Query the connected data warehouse
 - Surface account and deal insights
+- Run the organization's published Skills (reusable workflow instruction sets)
+clients_supported:
+- Claude (custom connector)
+- ChatGPT (custom app)
+- Claude Code
+- Codex CLI
+- Claude Managed Agents (via a service-account key)
+- Endgame CLI (cli/end-game-cli.yml — a non-AI client for the same endpoint)
+crosswalk: mcp/end-game-tool-crosswalk.yml
 related_rest_operations:
-- source_operation: openapi/end-game-openapi.json#createThread
-- source_operation: openapi/end-game-openapi.json#listThreads
-- source_operation: openapi/end-game-openapi.json#getThread
+- note: >-
+    None. No documented MCP tool is backed by a public REST operation — the REST API
+    is thread CRUD only. See mcp/end-game-tool-crosswalk.yml.
+well_known:
+- {path: /.well-known/oauth-authorization-server, host: app.endgame.io, status: 200, file: well-known/end-game-oauth-authorization-server.json}
+- {path: /.well-known/oauth-protected-resource, host: app.endgame.io, status: 200, file: well-known/end-game-oauth-protected-resource.json}

@@ -1,0 +1,90 @@
+generated: '2026-08-13'
+method: derived
+source: >-
+  MCP tool names from https://docs.endgame.io/features/cli and the provider-published
+  Agent Skill at https://docs.endgame.io/.well-known/agent-skills/endgame/skill.md;
+  REST operations from openapi/end-game-threads-api-openapi.yml and the served spec
+  openapi/_original/end-game-public-api-served-openapi.json
+summary: >-
+  Endgame's MCP surface and its REST surface do not overlap at all. MCP exposes the
+  context graph — searching entities, finding people, listing accounts — while the
+  public REST API exposes only thread CRUD, the conversational wrapper around that
+  graph. Not one documented MCP tool is backed by a public REST operation, and not one
+  REST operation has a corresponding tool. An agent that can only speak REST cannot
+  query the graph; it can only ask a question in natural language and poll for the
+  answer. That is the single most important integration fact about this provider.
+surfaces:
+  openapi:
+  - path: openapi/end-game-threads-api-openapi.yml
+    note: Docs-derived Threads API — 5 operations, full schemas, examples and error responses.
+  - path: openapi/_original/end-game-public-api-served-openapi.json
+    note: >-
+      Machine-served spec fetched live from https://app.endgame.io/api/v1/openapi.json
+      (HTTP 200, OpenAPI 3.1.1). Thinner — no components.schemas, no tags, 200-only
+      responses — but it exposes 7 operations absent from the documented reference.
+      Its paths omit the /api/v1 prefix that the same server actually requires.
+  graphql:
+    endpoint: null
+    note: No GraphQL surface published or discoverable.
+  mcp:
+    url: https://app.endgame.io/api/v1/mcp
+    transport: http
+    introspection: gated
+    note: >-
+      POST tools/list without credentials returns HTTP 401
+      {"error":"invalid_token"} with a WWW-Authenticate Bearer challenge, so live
+      inputSchema capture requires an authenticated session. Tool NAMES below are
+      taken verbatim from Endgame's own published documentation; their input schemas
+      are not published and are therefore not asserted here. The docs also state the
+      tool set is discovered per account and changes during beta, so this list is a
+      documented sample, not a complete manifest.
+crosswalk: []
+mcp_only:
+- tool: search_graph_entities
+  reason: >-
+    Searches accounts, people and deals across the context graph. No public REST
+    operation exposes graph entities — the REST API is thread CRUD only.
+  evidence: https://docs.endgame.io/features/cli
+  confidence: high
+- tool: get_graph_entities
+  reason: Returns the full record for a graph entity. No public REST equivalent.
+  evidence: https://docs.endgame.io/features/cli
+  confidence: high
+- tool: find_graph_person
+  reason: Resolves a person (stakeholder, champion, buyer) in the graph. No public REST equivalent.
+  evidence: https://docs.endgame.io/features/cli
+  confidence: high
+- tool: list_my_accounts
+  reason: Lists the accounts owned by the authenticated user. No public REST equivalent.
+  evidence: https://docs.endgame.io/features/cli
+  confidence: high
+rest_only:
+- capability: Thread lifecycle (documented public API)
+  operations: [createThread, getThread, listThreads, updateThread, deleteThread]
+  source: openapi/end-game-threads-api-openapi.yml
+  note: >-
+    The served spec names the same five operations with dotted ids — threads.create,
+    threads.get, threads.list, threads.update, threads.delete. An agent uses these to
+    ask a natural-language question and poll for the assistant's answer, which is a
+    different interaction model from calling a tool.
+- capability: Protected-static object storage
+  operations: [protectedStatic.list, protectedStatic.put, protectedStatic.delete, protectedStatic.getContent]
+  source: openapi/_original/end-game-public-api-served-openapi.json
+  note: >-
+    Present in the served spec only. Not documented anywhere on docs.endgame.io and
+    not mentioned by any MCP tool. Undocumented-but-served surface.
+- capability: MCP feedback triage (internal)
+  operations: [internal.feedback.list, internal.feedback.promote, internal.feedback.dismiss]
+  source: openapi/_original/end-game-public-api-served-openapi.json
+  note: >-
+    Self-described as internal — lists mcp_feedback submissions and promotes them to
+    a Linear issue. Served on the public spec but not part of the public contract;
+    recorded for completeness, not recommended for integration.
+coverage:
+  tools_named: 4
+  tools_bound_to_rest: 0
+  mcp_only: 4
+  rest_ops_total: 12
+  rest_ops_documented: 5
+  rest_ops_with_a_tool: 0
+  overlap: none

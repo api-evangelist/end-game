@@ -1,4 +1,4 @@
-generated: '2026-07-19'
+generated: '2026-08-13'
 method: searched
 source: https://docs.endgame.io/api-reference/introduction
 versioning:
@@ -7,10 +7,43 @@ versioning:
   base_path: /api/v1
   stability: beta
   docs: https://docs.endgame.io/api-reference/introduction
-status_page: https://docs.endgame.io/status
+  note: >-
+    The public API is described by Endgame as an open beta. The MCP server is
+    separately described as open beta with a tool set that is "actively developed and
+    subject to change", and the REST rate-limit quota is published as a beta default
+    "subject to change after the open beta".
+status_page: https://status.endgame.io
+status_page_alt: https://docs.endgame.io/status
+status_page_platform: Atlassian Statuspage
 changelog: https://docs.endgame.io/changelog
+changelog_artifact: changelog/end-game-changelog.yml
 deprecation:
   policy_url: null
   sunset_header: false
-  note: No formal deprecation/Sunset policy is documented; the public API is in beta and tools/behavior are subject to change.
+  note: >-
+    No formal deprecation or Sunset policy is published. Nothing in the docs commits
+    to a notice period, and no RFC 8594 Deprecation/Sunset header is documented. For
+    an API in open beta whose limits and tool set are stated as subject to change,
+    this is the clearest lifecycle gap on the profile.
+sla:
+  url: null
+  uptime_target: null
+  note: No public SLA or uptime commitment is published; status.endgame.io reports incidents only.
 deprecated_operations: []
+spec_drift:
+  observed: '2026-08-13'
+  note: >-
+    Two OpenAPI documents describe the same API and disagree. The documented
+    reference (openapi/end-game-threads-api-openapi.yml) names five thread operations
+    with camelCase operationIds and full schemas. The spec actually served at
+    https://app.endgame.io/api/v1/openapi.json
+    (openapi/_original/end-game-public-api-served-openapi.json, OpenAPI 3.1.1) names
+    twelve operations with dotted operationIds, carries no components.schemas, no
+    tags, and only 200 responses — and its paths omit the /api/v1 prefix that the
+    same server requires, so a client generated from the served spec against
+    servers[0] would call /threads and miss.
+  divergences:
+  - documented-but-thin: served spec has no schemas, tags or error responses
+  - served-but-undocumented: protectedStatic.list/put/delete/getContent
+  - served-but-internal: internal.feedback.list/promote/dismiss
+  - path-prefix: served paths omit /api/v1 while servers[] is https://app.endgame.io

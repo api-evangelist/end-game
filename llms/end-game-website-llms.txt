@@ -1,0 +1,157 @@
+# Endgame
+
+> Endgame is the answer engine for enterprise sales. Revenue superintelligence trained on your deals, calls, and sales frameworks.
+
+## Main Pages
+
+- [Home](https://endgame.io/): AI-powered revenue intelligence platform
+- [About](https://endgame.io/about): Our mission, team, and investors
+- [Careers](https://endgame.io/careers): Join the Endgame team
+- [Case Studies](https://endgame.io/case-studies): Customer success stories
+- [Blog](https://endgame.io/blog): Insights on product-led sales, GTM strategy, and AI
+
+## Case Studies
+
+- [How Handle grew ACV by 70% with real-time strategic account visibility](https://endgame.io/case-studies/handle): Ryan Vanshur built an always-on intelligence layer so Handle can query any strategic account, surface risks and stakeholder gaps, and align leadership on next steps.
+- [How Retool operationalizes personalized enablement at scale](https://endgame.io/case-studies/retool): Retool leveraged Endgame to streamline their GTM processes and accelerate revenue growth across their organization.
+- [How Monte Carlo achieved over 80% AI adoption across their GTM team](https://endgame.io/case-studies/monte-carlo): Monte Carlo's Co-founder & COO, Jordan Van Horn, started the year with a question that would reshape everything—and achieved 80% AI adoption across their entire GTM team.
+- [From AI prototypes to production systems: How BetterUp scaled what worked](https://endgame.io/case-studies/betterup): BetterUp's teams started with prototypes, but scaled into production with Endgame, unlocking myriad use cases across many teams.
+- [How Hex turned scattered sales data into connected context](https://endgame.io/case-studies/hex): Hex didn't need more information. They needed the context from their existing systems connected and actionable when it mattered most.
+
+## Blog Posts
+
+- [2027: The agent sprawl paradox](https://endgame.io/blog/2027-the-agent-sprawl-paradox): A team of 8 now has 240 agents running. None of them talk to each other. Why deploying more agents can make you less productive — and what to build first.
+- [What 30,000+ AI interactions reveal about how GTM teams actually work](https://endgame.io/blog/benchmark-report-2026): Behavioral data from real go-to-market professionals, not surveys or self-reports
+- [GTM economics: How curious revenue leaders decrease marginal expenses](https://endgame.io/blog/gtm-economics): A few years ago when a CRO wanted to understand why deals were stalling, it meant asking an analyst to sift through Salesforce, marketing data, call recordings, and email threads to assemble a narrative that felt complete.
+- [The Prototype Gap: How to build Endgame yourself](https://endgame.io/blog/the-prototype-gap): Most Endgame demos end with the same question: This is cool. But couldn't we just build this ourselves in GPT or Claude?
+- [Revenue superintelligence is here](https://endgame.io/blog/revenue-superintelligence): CROs have spent the last two years trying to make their teams AI-native.
+- [What happens when your sales AI actually knows your business](https://endgame.io/blog/what-happens-when-your-sales-ai-actually-knows-your-business): We recently wrote about how Templates help reps execute your sales methodology consistently.
+- [Why Endgame built templates](https://endgame.io/blog/why-endgame-built-templates): In nearly every customer meeting, we hear a similar frustration: teams invest heavily in sales methodology and enablement, but consistent execution remains elusive.
+- [Asking better questions with AI](https://endgame.io/blog/asking-better-questions-with-ai): When we launched Endgame with the promise that you could Ask Anything, we meant it.
+- [Ask anything in Endgame](https://endgame.io/blog/ask-anything): We're incredibly excited to share a major product update that we think will fundamentally change how sales teams work.
+- [Introducing Endgame 2.0](https://endgame.io/blog/endgame-2-0): Today, we're thrilled to announce Endgame 2.0, a new AI-native product for enterprise sellers.
+- [Today's buyer expects more](https://endgame.io/blog/todays-buyer-expects-more): In our previous post, with the help of GenAI, we covered the time-old process of generating value hypotheses with which to engage an account.
+- [Developing value hypotheses from account research](https://endgame.io/blog/developing-value-hypotheses-from-account-research): After our recent posts on analyzing 10-K's and earnings calls, we were asked to take it a step further: how to translate an idea gleaned from a 10-K into a clear value hypothesis that can be used to engage with your customer or prospect.
+- [Analyzing an earnings call transcript with ChatGPT](https://endgame.io/blog/analyzing-an-earnings-call-transcript-with-chatgpt): This post is the third in a series on how AI can help with various aspects of researching an account, one of the core parts of the job of a sales rep.
+- [Analyzing a 10-K with ChatGPT](https://endgame.io/blog/analyzing-a-10-k-with-chatgpt): This post is second in a series on how AI can help with various aspects of researching an account, one of the core parts of the job of a sales rep.
+- [Basic account research with Perplexity AI](https://endgame.io/blog/basic-account-research-with-perplexity-ai): This post is first in a series on how AI can help with various aspects of researching an account, one of the core parts of the job of a sales rep.
+- [6 ways to align your GTM team as you move up market](https://endgame.io/blog/6-ways-to-align-your-gtm-team-as-you-move-up-market): I guarantee that if you're on a B2B GTM team, you hear the word "enterprise" in nearly every meeting.
+- [How to build opportunity forecasting into SFDC based on time in stage](https://endgame.io/blog/how-to-build-opportunity-forecasting-into-sfdc-based-on-time-in-stage): If you read the first part of our [Rescale interview](/blog/how-rescale-builds-compensation-plans-for-new-expansion-and-renewal-revenue), you learned all about how Rescale's VP of Operations, Gabe Rothman, thinks about compensation planning.
+- [5 RevOps do's and dont's to unlock future pipeline](https://endgame.io/blog/5-revops-do-s-and-dont-s-to-unlock-future-pipeline): Revenue Operations (RevOps) is now the fastest-growing job in North America, as reported by Forbes.
+- [How Rescale builds compensation plans for new, expansion, and renewal revenue](https://endgame.io/blog/how-rescale-builds-compensation-plans-for-new-expansion-and-renewal-revenue): When it comes to compensation planning, it's important to balance new logo, renewal strategies, and expansion initiatives.
+- [How MongoDB transformed from a traditional sales-led business to a product-led GTM machine](https://endgame.io/blog/how-mongodb-transformed-from-a-traditional-sales-led-business-to-a-product-led-gtm-machine): Making the shift from open-source enterprise software to a consumption-based cloud model is a rare feat.
+- [Scaling to $1B ARR and beyond](https://endgame.io/blog/the-art-of-scaling-from-start-up-to-multi-billion-dollar-enterprise): Scaling a business is a lot like predicting the weather.
+- [8 lessons from top revenue leaders to boost productivity in 2024](https://endgame.io/blog/8-lessons-from-top-revenue-leaders-to-boost-productivity-in-2024): One of Merriam-Webster's words of the year is 'authentic.' It's funny, given AI's spike in popularity, but this is exactly why it should resonate more than ever—especially with revenue teams.
+- [Adapting to the new market: Navigating the Last Mile in 2024](https://endgame.io/blog/adapting-to-the-new-market-navigating-the-last-mile-in-2024): 2023 was an uphill battle for most leaders.
+- [Why an adaptive strategy is key to a thriving sales motion](https://endgame.io/blog/insights-from-pagerdutys-adaptive-sales-motion): When it comes to SaaS, strategic planning isn't just something you do once a year and forget about.
+- [How to surface product data in your CRM](https://endgame.io/blog/how-to-get-product-data-in-your-crm): As more and more sales teams launch product-led sales motions, one of the first challenges a RevOps team will tackle is how to enable your sales teams with product data—specifically by giving them access to said data from where they work—the CRM.
+- [Build vs Try: A new approach to build vs buy that accelerates GTM iteration](https://endgame.io/blog/build-vs-try): Build vs Buy is a classic framing in B2B software.
+- [The Build vs. Buy Guide for Product-led Sales Tooling](https://endgame.io/blog/build-vs-buy): As revenue goals loom and headcount is constrained, sales teams are leaning more than ever into tools, data, and systems to help uncover pipeline faster, improve pipeline performance, and increase rep productivity.
+- [How to run expansion plays with product-led sales](https://endgame.io/blog/guide-expansion-plays): All companies today are shifting strategy to weather the economic storms and three key themes are shining through: How can revenue leaders make sure reps are working at peak productivity?
+- [Guide to Launching Product-led Sales](https://endgame.io/blog/guide-to-launching-product-led-sales): Product-led sales = product data + sales.
+- [Transforming the modern revenue stack for a product-led future](https://endgame.io/blog/revops-and-the-modern-revenue-stack-for-a-product-led-future): The way modern software companies go-to-market is rapidly changing – first party product data is paramount in a product-led company, speciality tools to expedite sales cycles are abound, and RevOps teams are taking center stage in how all of these pieces work together.
+- [Key takeaways from the first ever Product-led Sales Summit](https://endgame.io/blog/key-takeaways-product-led-sales-summit): Insights from the best revenue leaders at high-growth PLG companies including Atlassian, MongoDB, Calendly, Figma, Retool and Notion.
+- [How to build a product-led GTM strategy](https://endgame.io/blog/how-to-build-product-led-gtm): Being product-led and crafting a systematic product-led GTM strategy are two different things.
+- [How to know when PLG companies are ready for product-led sales](https://endgame.io/blog/elena-verna-ready-for-pls): In the part 3 of this guest series, learn from Elena Verna about the signs you're ready for product-led sales and best practices on how to layer on new growth motions.
+- [Seed, land, and expand framework for product-led sales](https://endgame.io/blog/seed-land-expand-framework): To drive sustained growth in B2B SaaS, you have to continually increase revenue of your install base.
+- [What are PQAs and PQLs and how to use them in product-led sales](https://endgame.io/blog/elena-verna-pqa-pql-guide): Welcome to part 2 of a three blog series I'm partnering on with Endgame to help PLG companies better understand what product-led sales is and how they can incorporate it into their growth strategy.
+- [The difference between traditional enterprise sales and product-led sales](https://endgame.io/blog/elena-verna-difference-enterprise-sales-product-led-sales): As a growth person, product-led sales immediately piqued my interest as an exciting evolution in B2B software.
+- [Why PLG companies need more than a CRM to run product-led sales](https://endgame.io/blog/guide-crm-product-led-sales): Our customers have all faced a similar reckoning when the CRM they've trusted for years doesn't meet the needs of a high growth product-led sales motion.
+- [Endgame is now SOC 2 Type II compliant](https://endgame.io/blog/soc-2-type-ii): We know how important the security of product and customer data is to our customers, which is why we are excited to announce that Endgame has achieved SOC 2 Type II compliance.
+- [We've raised a $30M Series B](https://endgame.io/blog/series-b-announcement): Tl;dr — Since our Series A announcement in July, we've built a killer product, added some incredible customers that include product-led visionaries such as Retool, LaunchDarkly, Airbyte, Algolia, Shortcut, Grain, and raised a Series B to step on the gas and accelerate.
+- [Endgame has achieved SOC 2 Type I Compliance](https://endgame.io/blog/endgame-has-achieved-soc-2-type-i-compliance): When we set out to transform how modern software companies go to market, we knew that our customer relationships would be built on trust.
+- [Product-led sales starts with customer segmentation](https://endgame.io/blog/product-led-sales-starts-with): This article is for revenue leaders at PLG companies, including:
+- [Announcing Endgame (and funding)](https://endgame.io/blog/announcing-endgame): tl;dr - We're excited to announce that we've raised over $17 million to power product-led sales.
+
+## Legal
+
+- [Terms of Service](https://endgame.io/terms): Terms of service
+- [Terms of Use](https://endgame.io/tou): Platform terms of use
+- [Privacy Policy](https://endgame.io/privacy): Privacy policy
+- [Acceptable Use Policy](https://endgame.io/acceptable-use): Acceptable use policy
+- [Data Processing Agreement](https://endgame.io/dpa): DPA for enterprise customers
+
+---
+
+# Product Documentation
+
+The following is from [docs.endgame.io](https://docs.endgame.io):
+
+# Endgame
+
+## Docs
+
+- [Welcome to Endgame](https://docs.endgame.io/index.md): Transform enterprise sales with AI-powered knowledge
+- [Changelog](https://docs.endgame.io/changelog.md): Product updates and announcements
+- [Core Concepts](https://docs.endgame.io/core-concepts.md): Understand how Endgame transforms your sales process
+- [Navigating Endgame](https://docs.endgame.io/navigating-endgame.md): Learn how to navigate and use Endgame's features for deep customer understanding
+- [MCP Server](https://docs.endgame.io/features/mcp-server.md): Connect Endgame to AI assistants using the Model Context Protocol
+- [Endgame CLI](https://docs.endgame.io/features/cli.md): Run Endgame tools directly from your terminal
+- [Digests](https://docs.endgame.io/features/digests.md): Configure custom Endgame digests, sent straight to your inbox.
+- [Skills](https://docs.endgame.io/features/skills.md): Use your organization's repeatable, standardized workflows
+- [Slack](https://docs.endgame.io/features/slack.md): Use Endgame threads within Slack
+- [User Preferences](https://docs.endgame.io/features/user-preferences.md): Personal preferences to improve your chat experience
+- [File Upload](https://docs.endgame.io/features/file-upload.md): Adding contextual knowledge to your chat responses
+- [Export Thread Content](https://docs.endgame.io/features/export-thread-content.md): How to export chat thread responses
+- [Core Concepts](https://docs.endgame.io/legacy-endgame/getting-started/core-concepts.md): Understand how Endgame transforms your sales process
+- [Navigating Endgame](https://docs.endgame.io/legacy-endgame/getting-started/navigating-endgame.md): Learn how to navigate and use Endgame's features for deep customer understanding
+- [Your First 10 Minutes](https://docs.endgame.io/legacy-endgame/getting-started/your-first-10-minutes.md): Get to your first insight in one session
+- [Query Your Book](https://docs.endgame.io/legacy-endgame/getting-started/query-your-book.md): Ask questions across all your accounts from the homepage
+- [Ask Better Questions](https://docs.endgame.io/legacy-endgame/getting-started/endgame-chat-201.md): Master advanced prompting techniques to unlock Endgame's full potential
+- [Skills](https://docs.endgame.io/legacy-endgame/features/skills.md): Create repeatable, standardized workflows and artifacts
+- [Publishing & Sharing](https://docs.endgame.io/legacy-endgame/features/publishing-and-sharing.md): Share your AI-generated insights with teammates and external stakeholders
+- [Tasks: Personal Digests](https://docs.endgame.io/legacy-endgame/features/tasks.md): Configure custom Endgame digests, sent straight to your inbox.
+- [File Upload](https://docs.endgame.io/legacy-endgame/features/file-upload.md): Adding contextual knowledge to your chat responses
+- [Export Thread Content](https://docs.endgame.io/legacy-endgame/features/export-thread-content.md): How to export chat thread responses
+- [User Preferences](https://docs.endgame.io/legacy-endgame/features/user-preferences.md): Personal preferences and stored memories to improve your chat experience
+- [Salesforce](https://docs.endgame.io/integrations/salesforce.md): Seamless integration with Salesforce for real-time account data
+- [Salesforce via Snowflake](https://docs.endgame.io/integrations/salesforce-via-snowflake.md): Give Endgame read access to your Salesforce data in Snowflake
+- [Chorus](https://docs.endgame.io/integrations/chorus.md): Process Chorus call recordings and gain insights from your meetings
+- [Clari Copilot](https://docs.endgame.io/integrations/clari-copilot.md): Process Clari Copilot call recordings and gain insights from your meetings
+- [Endgame Notetaker](https://docs.endgame.io/integrations/endgame-notetaker.md): Enable the Endgame Notetaker to join meetings and generate call transcripts
+- [Gong](https://docs.endgame.io/integrations/gong.md): Connect Gong to automatically process call transcripts and gain AI-powered insights
+- [Zoom](https://docs.endgame.io/integrations/zoom.md): Process Zoom call recordings and gain insights from your meetings
+- [Microsoft Teams](https://docs.endgame.io/integrations/microsoft-teams.md): Connect Microsoft Teams to sync account channel data to Endgame
+- [Slack](https://docs.endgame.io/integrations/slack.md): Connect Slack channels to accounts for seamless conversation tracking
+- [Confluence](https://docs.endgame.io/integrations/confluence.md): Connect Confluence to sync Spaces as knowledge
+- [Google Drive](https://docs.endgame.io/integrations/google-drive.md): Connect to Google Drive to sync context documents, export directly to Drive, and sync your calendar
+- [Highspot](https://docs.endgame.io/integrations/highspot.md): Connect Highspot to sync sales enablement content as knowledge
+- [Microsoft Outlook Calendar](https://docs.endgame.io/integrations/microsoft-outlook-calendar.md): Connect to Microsoft Outlook Calendar to sync your calendar data
+- [Microsoft SharePoint](https://docs.endgame.io/integrations/microsoft-sharepoint.md): Connect Microsoft SharePoint to sync document libraries to Endgame
+- [Notion](https://docs.endgame.io/integrations/notion.md): Connect Notion to sync team content as knowledge
+- [Seismic](https://docs.endgame.io/integrations/seismic.md): Connect Seismic to sync sales enablement content as knowledge
+- [Looker](https://docs.endgame.io/integrations/looker.md): Grant Endgame access to execute select Looker queries
+- [Snowflake](https://docs.endgame.io/integrations/snowflake.md): Connect Snowflake tables to Endgame
+- [Authentication](https://docs.endgame.io/authentication/index.md): Learn about the available login options and granting user access.
+- [Introduction](https://docs.endgame.io/api-reference/introduction.md): Create and manage Endgame threads over a standard HTTPS REST API.
+- [Authentication](https://docs.endgame.io/api-reference/authentication.md): Create and use API keys or machine-to-machine credentials to authenticate REST API requests.
+- [Endpoints](https://docs.endgame.io/api-reference/endpoints.md): Reference for the five thread endpoints that make up the public API.
+- [Admin's Guide to Endgame](https://docs.endgame.io/admin-getting-started.md): Welcome to the ultimate sales knowledge control tower
+- [Overview](https://docs.endgame.io/implementation-guide/overview.md): Set up Endgame from scratch so your team can start getting value on day one
+- [Login & Connect CRM](https://docs.endgame.io/implementation-guide/login-and-connect-crm.md): Get up and running with Endgame in minutes
+- [Connect Transcripts](https://docs.endgame.io/implementation-guide/connect-conversations.md): Verify your call recording integration and understand what flows into Endgame
+- [Connect Chat](https://docs.endgame.io/implementation-guide/connect-slack.md): Map Slack or Microsoft Teams channels to accounts so internal context powers Endgame responses
+- [Upload Knowledge](https://docs.endgame.io/implementation-guide/upload-knowledge.md): Add your sales methodology, battlecards, and playbooks to shape how Endgame thinks
+- [Create Your First Rule](https://docs.endgame.io/implementation-guide/create-first-rule.md): Teach Endgame your org's terminology and CRM conventions
+- [Build Your First Skill](https://docs.endgame.io/implementation-guide/build-first-skill.md): Turn a repeatable workflow into a reusable skill your team can run
+- [Configure Salesforce Fields](https://docs.endgame.io/implementation-guide/configure-salesforce.md): Tell Endgame which custom fields matter so responses reference the right data
+- [Test Drive](https://docs.endgame.io/implementation-guide/test-drive.md): Validate your configuration by chatting with Endgame across a few accounts
+- [Invite Your Team](https://docs.endgame.io/implementation-guide/invite-team.md): Bring users in and set them up for success
+- [User Management](https://docs.endgame.io/user-management.md): Control which users have what access to Endgame
+- [Salesforce Essentials](https://docs.endgame.io/integrations/salesforce-essentials-for-admins.md): Focus on the basics that enable intelligent analysis without overthinking your Salesforce setup
+- [Quickstart](https://docs.endgame.io/skills/quickstart.md): A quick start guide to create and manage global skills in Endgame
+- [Skills: Composing Skills](https://docs.endgame.io/skills/skills-101.md)
+- [Import Documents](https://docs.endgame.io/knowledge/file-upload.md): Adding contextual knowledge to your chat responses
+- [Sales Knowledge: What to Connect](https://docs.endgame.io/knowledge/knowledge-basics-for-admins.md): Connect the right sales content so Endgame can leverage it when answering questions
+- [Google Drive Troubleshooting](https://docs.endgame.io/knowledge/google-drive-troubleshooting.md): Updating Google workspace permissions to allow connection with Endgame
+- [Vulnerability Disclosure Policy](https://docs.endgame.io/vdp.md): Endgame Labs, Inc.'s Vulnerability Disclosure Policy
+- [Security](https://docs.endgame.io/trust/security.md): Learn about Endgame's security practices and certifications
+- [Privacy](https://docs.endgame.io/trust/privacy.md): Privacy policy and data deletion requests
+- [Status](https://docs.endgame.io/status.md): Check Endgame system status
+- [Contact Us](https://docs.endgame.io/contact.md): Get in touch with the Endgame support team
+- [Application](https://docs.endgame.io/platform.md): Access the Endgame platform
+- [Website](https://docs.endgame.io/homepage.md): Visit the Endgame homepage
+
+## OpenAPI Specs
+
+- [openapi](https://docs.endgame.io/api-reference/openapi.json)

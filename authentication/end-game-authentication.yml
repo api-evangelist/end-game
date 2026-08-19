@@ -1,16 +1,97 @@
-generated: '2026-07-19'
-method: derived
-source: openapi/end-game-openapi.json
+generated: '2026-08-13'
+method: searched
+source: openapi/end-game-threads-api-openapi.yml
+docs:
+- https://docs.endgame.io/api-reference/authentication
+- https://app.endgame.io/.well-known/oauth-authorization-server
+- https://app.endgame.io/.well-known/oauth-protected-resource
 summary:
   types:
   - http
+  - oauth2
+  api_key_in:
+  - header
+  oauth2_flows:
+  - authorizationCode
+  - clientCredentials
+  - deviceCode
+  note: >-
+    Two authentication surfaces. The REST API takes a single Bearer credential —
+    either a static Endgame API key (eak_ prefix) or a WorkOS-issued JWT — and the
+    OpenAPI declares only that one http/bearer scheme. The MCP endpoint and the CLI
+    use full OAuth 2.0 against the authorization server advertised at
+    app.endgame.io, whose endpoints are delegated to WorkOS at login.endgame.io.
+    Authorization is expressed as PRINCIPAL, not scope: see scopes/end-game-scopes.yml.
 schemes:
 - name: bearerAuth
   type: http
   scheme: bearer
+  applies_to: REST API (/api/v1/*)
   description: 'One of: an Endgame API key prefixed `eak_` (created from Settings → API Keys
     with a Personal or Org-wide scope), or a WorkOS access token from an Endgame-provisioned
     M2M application (created from Settings → Applications and exchanged via the `client_credentials`
     grant).'
   sources:
-  - openapi/end-game-openapi.json
+  - openapi/end-game-threads-api-openapi.yml
+  - https://docs.endgame.io/api-reference/authentication
+- name: WorkOS OAuth 2.0
+  type: oauth2
+  applies_to: MCP endpoint (https://app.endgame.io/api/v1/mcp), Endgame CLI, M2M applications
+  issuer: https://app.endgame.io
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://login.endgame.io/oauth2/authorize
+    tokenUrl: https://login.endgame.io/oauth2/token
+    pkce: S256
+  - flow: deviceCode
+    deviceAuthorizationUrl: https://login.endgame.io/oauth2/device_authorization
+    tokenUrl: https://login.endgame.io/oauth2/token
+  - flow: clientCredentials
+    tokenUrl: https://login.endgame.io/oauth2/token
+  jwks_uri: https://login.endgame.io/oauth2/jwks
+  introspection_endpoint: https://login.endgame.io/oauth2/introspection
+  registration_endpoint: https://login.endgame.io/oauth2/register
+  dynamic_client_registration: true
+  scopes_ref: scopes/end-game-scopes.yml
+  sources:
+  - https://app.endgame.io/.well-known/oauth-authorization-server
+  - https://docs.endgame.io/api-reference/authentication
+credentials:
+- kind: api-key
+  prefix: eak_
+  scope_toggle: [Personal, Org-wide]
+  provisioning: https://app.endgame.io/settings/api-keys
+  admin_only: true
+  shown_once: true
+  scope_immutable: true
+  revocation: >-
+    Revoked from the API Keys settings page; immediate. Personal keys are revoked
+    automatically when the owning user leaves the organization.
+- kind: m2m-application
+  provisioning: https://app.endgame.io/settings/applications
+  admin_only: true
+  grant: client_credentials
+  token_endpoint: https://login.endgame.io/oauth2/token
+  token_format: JWT
+  note: >-
+    Endgame provisions a WorkOS OAuth client and returns a client id and secret; the
+    secret is shown once and can be rotated. Deleting the application revokes all
+    tokens issued under it. Endgame's own docs prefer M2M over org-wide API keys for
+    read-only service integrations because short-lived tokens are easier to contain.
+authorization:
+  model: principal-based
+  principals:
+  - {principal: user, credentials: [personal API key, user OAuth token], writes: true, reads: 'own threads + every org-published thread'}
+  - {principal: org-wide service identity, credentials: [org-wide API key, M2M application token], writes: false, reads: 'every org-published thread'}
+  mutation_rule: >-
+    Writes require a user identity. Org-wide credentials return 403 FORBIDDEN on
+    create, rename and delete. Only a thread's creator may rename or delete it, even
+    when the thread is published to the organization. Cross-organization access is
+    always denied.
+  gap: >-
+    Endgame's own documentation states org-wide write scope is on the roadmap; today
+    a write-capable automation must use a personal API key issued under a dedicated
+    service-account user.
+failure_modes:
+- {status: 401, code: UNAUTHORIZED, cause: missing, malformed or revoked credential}
+- {status: 403, code: FORBIDDEN, cause: valid credential without permission to mutate this thread}

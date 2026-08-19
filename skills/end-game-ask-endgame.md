@@ -1,7 +1,7 @@
 ---
 name: Ask Endgame a revenue question
 description: Create a thread with a natural-language prompt, then poll until the assistant's answer is ready.
-api: openapi/end-game-openapi.json
+api: openapi/_original/end-game-openapi.json
 operations: [createThread, getThread]
 ---
 

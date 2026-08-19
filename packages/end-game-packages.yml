@@ -1,0 +1,53 @@
+generated: '2026-08-13'
+method: searched
+source: https://docs.endgame.io/features/cli
+summary: >-
+  Endgame ships exactly one first-party client: the Endgame CLI, a Go binary built
+  from source out of the public MIT-licensed Endgame-Labs/endgame-cli repository. It
+  is not published to any package registry — the documented install path is git clone
+  plus ./install.sh — and the repository carries no git tags or GitHub releases, so
+  the Go module proxy resolves it only to a pseudo-version cut from the latest commit.
+  There is no first-party npm, PyPI, RubyGems, NuGet, Maven or crates.io package for
+  the REST API or the MCP server; the MCP server is a hosted remote endpoint that
+  needs no installed package, and the REST API is called directly over HTTPS.
+packages:
+- language: go
+  registry: go-modules
+  name: github.com/Endgame-Labs/endgame-cli
+  url: https://pkg.go.dev/github.com/Endgame-Labs/endgame-cli
+  repository: https://github.com/Endgame-Labs/endgame-cli
+  install: |
+    git clone https://github.com/Endgame-Labs/endgame-cli.git
+    cd endgame-cli
+    ./install.sh
+  official: true
+  kind: cli
+  license: MIT
+  version: v0.0.0-20260702164744-ef3d01d39fbb
+  published: '2026-07-02'
+  version_note: >-
+    Pseudo-version only. proxy.golang.org/github.com/Endgame-Labs/endgame-cli/@v/list
+    returns an EMPTY list — the repository has published no semantic-version tag and
+    no GitHub release — so the proxy resolves @latest to a commit-derived
+    pseudo-version dated 2026-07-02 (commit ef3d01d). A consumer running the
+    documented ./install.sh gets whatever is on main at clone time and cannot state
+    which version they are running beyond `endgame version` output. Registry probed
+    2026-08-13.
+  currency_note: >-
+    Last commit 2026-07-02, repo created 2026-03-20, not archived. Contemporary with
+    the public API's open beta, so the CLI is not stale relative to the API it wraps.
+  commands_ref: cli/end-game-cli.yml
+registry_probes:
+- {registry: npm, query: endgame, result: no-first-party-package}
+- {registry: pypi, package: endgame, result: different-owner, note: 'pypi.org/project/endgame is Salesforce''s AWS pentesting tool (github.com/salesforce/endgame) — not Endgame Labs, Inc.'}
+- {registry: npm, package: endgame-mcp, result: different-owner, note: 'npm endgame-mcp is published by Serverless Inc (github.com/endgame-hq/mcp, endgame.dev) — a different company that also uses the Endgame name. Excluded under the ownership rule.'}
+- {registry: go-modules, package: github.com/Endgame-Labs/endgame-cli, result: found, note: 'pseudo-version only; no tags'}
+- {registry: rubygems, result: not-published}
+- {registry: nuget, result: not-published}
+- {registry: maven-central, result: not-published}
+- {registry: crates.io, result: not-published}
+sdk_gap:
+  note: >-
+    No server-side SDK exists for the /api/v1/threads REST surface in any language.
+    The docs demonstrate the API with raw curl only. This is a real ergonomics gap
+    for an API in open beta whose primary consumers are backend automations.

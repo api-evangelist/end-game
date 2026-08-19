@@ -1,6 +1,6 @@
 generated: '2026-07-19'
 method: derived
-source: openapi/end-game-openapi.json
+source: openapi/_original/end-game-openapi.json
 docs: https://docs.endgame.io/api-reference/endpoints
 entities:
 - name: Thread

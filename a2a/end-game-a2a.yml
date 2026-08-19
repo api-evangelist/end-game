@@ -1,0 +1,60 @@
+generated: '2026-08-13'
+method: probed
+source: https://docs.endgame.io/.well-known/agent-card.json
+discovery:
+  path: /.well-known/agent-card.json
+  canonical: true
+  host: docs.endgame.io
+  note: >-
+    Served from Endgame's own documentation host (docs.endgame.io, the developer
+    portal already wired in apis.yml). The card names organization "Endgame" and
+    points every URL back at docs.endgame.io, so it belongs to this company. The
+    application host app.endgame.io returns 404 on both /.well-known/agent-card.json
+    and the legacy /.well-known/agent.json; www.endgame.io returns 404 on both.
+conformance:
+  spec: A2A 1.0.0
+  grade: conformant
+  protocol_version: '0.3'
+  preferred_transport: HTTP+JSON
+  hard_checks:
+    capabilities_is_object: true
+    protocol_version_present: true
+    skills_is_array: true
+  deviations:
+  - supportedInterfaces-instead-of-additionalInterfaces
+card:
+  name: Endgame
+  url: https://docs.endgame.io/
+  version: 1.0.0
+  documentation_url: https://docs.endgame.io/
+  provider_organization: Endgame
+  capabilities:
+    streaming: false
+    pushNotifications: false
+  default_input_modes:
+  - text/plain
+  default_output_modes:
+  - text/plain
+  skills: 1
+  skill_ids:
+  - endgame
+  file: end-game-agent-card.json
+related:
+  agent_skill: https://docs.endgame.io/.well-known/agent-skills/endgame/skill.md
+  agent_skill_file: skills/end-game-published-skill.md
+  mcp_server: https://app.endgame.io/api/v1/mcp
+  note: >-
+    The card's single skill links to a provider-published Agent Skill markdown file,
+    saved verbatim at skills/end-game-published-skill.md. The card itself advertises
+    an HTTP+JSON interface at the docs host rather than an A2A or MCP endpoint; the
+    callable agent surface is the MCP server recorded in mcp/end-game-mcp.yml.
+x-evidence:
+  fetched: '2026-08-13'
+  url: https://docs.endgame.io/.well-known/agent-card.json
+  http_status: 200
+  content_type: application/json
+  negative_probes:
+  - {url: 'https://app.endgame.io/.well-known/agent-card.json', http_status: 404}
+  - {url: 'https://app.endgame.io/.well-known/agent.json', http_status: 404}
+  - {url: 'https://www.endgame.io/.well-known/agent-card.json', http_status: 404}
+  - {url: 'https://docs.endgame.io/.well-known/agent.json', http_status: 404}
