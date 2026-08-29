@@ -1,0 +1,193 @@
+openapi: 3.2.0
+info:
+  title: Endgame Public Protected Static API
+  version: 1.0.0
+servers:
+- url: https://app.endgame.io
+security:
+- bearerAuth: []
+tags:
+- name: Protected Static
+paths:
+  /protected-static/objects:
+    get:
+      operationId: protectedStatic.list
+      summary: List protected-static objects
+      parameters:
+      - name: prefix
+        in: query
+        schema:
+          type: string
+          maxLength: 1024
+        allowEmptyValue: true
+        allowReserved: true
+      - name: maxResults
+        in: query
+        schema:
+          default: 100
+          type: integer
+          minimum: 1
+          maximum: 1000
+        allowEmptyValue: true
+        allowReserved: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  objects:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        path:
+                          type: string
+                        size:
+                          type: integer
+                        contentType:
+                          anyOf:
+                          - type: string
+                          - type: 'null'
+                        updated:
+                          anyOf:
+                          - type: string
+                          - type: 'null'
+                        etag:
+                          anyOf:
+                          - type: string
+                          - type: 'null'
+                      required:
+                      - path
+                      - size
+                      - contentType
+                      - updated
+                      - etag
+                required:
+                - objects
+      tags:
+      - Protected Static
+    put:
+      operationId: protectedStatic.put
+      summary: Upload or replace a protected-static object
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                path:
+                  type: string
+                  minLength: 1
+                  maxLength: 1024
+                contentType:
+                  type: string
+                  minLength: 1
+                  maxLength: 255
+                contentBase64:
+                  type: string
+                  minLength: 1
+                  maxLength: 10485760
+              required:
+              - path
+              - contentType
+              - contentBase64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  path:
+                    type: string
+                  size:
+                    type: integer
+                  contentType:
+                    anyOf:
+                    - type: string
+                    - type: 'null'
+                  updated:
+                    anyOf:
+                    - type: string
+                    - type: 'null'
+                  etag:
+                    anyOf:
+                    - type: string
+                    - type: 'null'
+                required:
+                - path
+                - size
+                - contentType
+                - updated
+                - etag
+      tags:
+      - Protected Static
+    delete:
+      operationId: protectedStatic.delete
+      summary: Delete a protected-static object
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                path:
+                  type: string
+                  minLength: 1
+                  maxLength: 1024
+              required:
+              - path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  path:
+                    type: string
+                  deleted:
+                    const: true
+                required:
+                - path
+                - deleted
+      tags:
+      - Protected Static
+  /protected-static/objects/content:
+    get:
+      operationId: protectedStatic.getContent
+      summary: Download a protected-static object's content
+      parameters:
+      - name: path
+        in: query
+        required: true
+        schema:
+          type: string
+          minLength: 1
+          maxLength: 1024
+        allowEmptyValue: true
+        allowReserved: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - {}
+                - not: {}
+      tags:
+      - Protected Static
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Endgame API key (eak_*) or WorkOS JWT. Obtain an API key from Settings → API keys.

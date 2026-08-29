@@ -1,8 +1,8 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Endgame Public Threads API
+  title: End Game Threads API
   version: 1.0.0
-  description: Create and manage Endgame threads over HTTPS.
+  description: 'Operations tagged Threads across 2 of this provider''s published API definitions: end-game-openapi.json, end-game-public-api-served-openapi.json. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://app.endgame.io
 security:
@@ -71,6 +71,8 @@ paths:
                 $ref: '#/components/schemas/ListThreadsResponse'
         '400':
           $ref: '#/components/responses/InvalidParams'
+    servers:
+    - url: https://app.endgame.io
   /api/v1/threads/{id}:
     get:
       operationId: getThread
@@ -129,39 +131,612 @@ paths:
                 $ref: '#/components/schemas/DeleteThreadResponse'
         '403':
           $ref: '#/components/responses/Forbidden'
+    servers:
+    - url: https://app.endgame.io
+  /threads:
+    post:
+      operationId: threads.create
+      summary: Create a thread
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                prompt:
+                  type: string
+                  minLength: 1
+                title:
+                  type: string
+                  minLength: 1
+                accountId:
+                  type: string
+                secondaryId:
+                  type: string
+              required:
+              - prompt
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  thread:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      title:
+                        type: string
+                      createdAt:
+                        type: string
+                        format: date-time
+                      updatedAt:
+                        anyOf:
+                        - type: string
+                          format: date-time
+                        - type: 'null'
+                      accountId:
+                        anyOf:
+                        - type: string
+                        - type: 'null'
+                      secondaryId:
+                        anyOf:
+                        - type: string
+                        - type: 'null'
+                      published:
+                        type: boolean
+                      deleted:
+                        type: boolean
+                      threadUrl:
+                        anyOf:
+                        - type: string
+                          format: uri
+                        - type: 'null'
+                    required:
+                    - id
+                    - title
+                    - createdAt
+                    - updatedAt
+                    - accountId
+                    - secondaryId
+                    - published
+                    - deleted
+                    - threadUrl
+                  messageId:
+                    type: string
+                  responseMessageId:
+                    type: string
+                required:
+                - thread
+      tags:
+      - Threads
+    get:
+      operationId: threads.list
+      summary: List threads
+      parameters:
+      - name: cursor
+        in: query
+        schema:
+          type: string
+        allowEmptyValue: true
+        allowReserved: true
+      - name: limit
+        in: query
+        schema:
+          default: 25
+          type: integer
+          minimum: 1
+          maximum: 100
+        allowEmptyValue: true
+        allowReserved: true
+      - name: accountId
+        in: query
+        schema:
+          type: string
+        allowEmptyValue: true
+        allowReserved: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  threads:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        title:
+                          type: string
+                        createdAt:
+                          type: string
+                          format: date-time
+                        updatedAt:
+                          anyOf:
+                          - type: string
+                            format: date-time
+                          - type: 'null'
+                        accountId:
+                          anyOf:
+                          - type: string
+                          - type: 'null'
+                        secondaryId:
+                          anyOf:
+                          - type: string
+                          - type: 'null'
+                        published:
+                          type: boolean
+                        deleted:
+                          type: boolean
+                        threadUrl:
+                          anyOf:
+                          - type: string
+                            format: uri
+                          - type: 'null'
+                      required:
+                      - id
+                      - title
+                      - createdAt
+                      - updatedAt
+                      - accountId
+                      - secondaryId
+                      - published
+                      - deleted
+                      - threadUrl
+                  nextCursor:
+                    anyOf:
+                    - type: string
+                    - type: 'null'
+                  truncated:
+                    type: boolean
+                required:
+                - threads
+                - nextCursor
+                - truncated
+      tags:
+      - Threads
+    servers:
+    - url: https://app.endgame.io
+  /threads/{id}:
+    get:
+      operationId: threads.get
+      summary: Get a thread
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  thread:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      title:
+                        type: string
+                      createdAt:
+                        type: string
+                        format: date-time
+                      updatedAt:
+                        anyOf:
+                        - type: string
+                          format: date-time
+                        - type: 'null'
+                      accountId:
+                        anyOf:
+                        - type: string
+                        - type: 'null'
+                      secondaryId:
+                        anyOf:
+                        - type: string
+                        - type: 'null'
+                      published:
+                        type: boolean
+                      deleted:
+                        type: boolean
+                      threadUrl:
+                        anyOf:
+                        - type: string
+                          format: uri
+                        - type: 'null'
+                    required:
+                    - id
+                    - title
+                    - createdAt
+                    - updatedAt
+                    - accountId
+                    - secondaryId
+                    - published
+                    - deleted
+                    - threadUrl
+                  messages:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        threadId:
+                          type: string
+                        role:
+                          enum:
+                          - assistant
+                          - user
+                          type: string
+                        content:
+                          type: string
+                        status:
+                          anyOf:
+                          - enum:
+                            - in_progress
+                            - corroborating
+                            - completed
+                            - failed
+                            - cancelled
+                            type: string
+                          - type: 'null'
+                        createdAt:
+                          type: string
+                          format: date-time
+                        completedAt:
+                          anyOf:
+                          - type: string
+                            format: date-time
+                          - type: 'null'
+                        steps:
+                          anyOf:
+                          - type: array
+                            items:
+                              type: object
+                              properties:
+                                description:
+                                  type: string
+                              required:
+                              - description
+                          - type: 'null'
+                        sources:
+                          anyOf:
+                          - type: array
+                            items:
+                              type: object
+                              additionalProperties: {}
+                          - type: 'null'
+                        attachments:
+                          anyOf:
+                          - type: array
+                            items:
+                              type: object
+                              additionalProperties: {}
+                          - type: 'null'
+                        model:
+                          anyOf:
+                          - type: string
+                          - type: 'null'
+                      required:
+                      - id
+                      - threadId
+                      - role
+                      - content
+                      - status
+                      - createdAt
+                      - completedAt
+                      - steps
+                      - sources
+                      - attachments
+                      - model
+                  status:
+                    type: object
+                    properties:
+                      state:
+                        enum:
+                        - idle
+                        - in_progress
+                        - error
+                        type: string
+                      activeMessageId:
+                        anyOf:
+                        - type: string
+                        - type: 'null'
+                      latestUpdate:
+                        anyOf:
+                        - type: string
+                        - type: 'null'
+                      stepCount:
+                        type: integer
+                        minimum: 0
+                    required:
+                    - state
+                    - activeMessageId
+                    - latestUpdate
+                    - stepCount
+                required:
+                - thread
+                - messages
+                - status
+      tags:
+      - Threads
+    patch:
+      operationId: threads.update
+      summary: Update thread
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  minLength: 1
+              required:
+              - title
+              additionalProperties: false
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  thread:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      title:
+                        type: string
+                      createdAt:
+                        type: string
+                        format: date-time
+                      updatedAt:
+                        anyOf:
+                        - type: string
+                          format: date-time
+                        - type: 'null'
+                      accountId:
+                        anyOf:
+                        - type: string
+                        - type: 'null'
+                      secondaryId:
+                        anyOf:
+                        - type: string
+                        - type: 'null'
+                      published:
+                        type: boolean
+                      deleted:
+                        type: boolean
+                      threadUrl:
+                        anyOf:
+                        - type: string
+                          format: uri
+                        - type: 'null'
+                    required:
+                    - id
+                    - title
+                    - createdAt
+                    - updatedAt
+                    - accountId
+                    - secondaryId
+                    - published
+                    - deleted
+                    - threadUrl
+                required:
+                - thread
+      tags:
+      - Threads
+    delete:
+      operationId: threads.delete
+      summary: Delete thread
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  deleted:
+                    const: true
+                required:
+                - id
+                - deleted
+      tags:
+      - Threads
+    servers:
+    - url: https://app.endgame.io
 components:
   responses:
-    InvalidParams:
-      description: Request body or query parameters failed validation. See [Errors](/api-reference/endpoints#errors) for the full error envelope and code list.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     Forbidden:
       description: Credential is valid but not permitted. Either the operation requires a user-scoped API key (org-wide credentials cannot mutate threads during beta), or the caller is user-scoped but did not create the thread. See [Errors](/api-reference/endpoints#errors) for the full error envelope.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+    InvalidParams:
+      description: Request body or query parameters failed validation. See [Errors](/api-reference/endpoints#errors) for the full error envelope and code list.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    ThreadId:
+      name: id
+      in: path
+      required: true
+      description: Thread identifier.
+      schema:
+        type: string
   schemas:
-    DeleteThreadResponse:
+    UpdateThreadRequest:
+      type: object
+      description: Only `title` is writable. Unknown fields are rejected with `INVALID_PARAMS`.
+      additionalProperties: false
+      required:
+      - title
+      properties:
+        title:
+          type: string
+          minLength: 1
+          description: New title. Must be at least one character.
+          example: Book of business review — Q2
+      example:
+        title: Book of business review — Q2
+    GetThreadResponse:
       type: object
       required:
-      - id
-      - deleted
+      - thread
+      - messages
+      - status
       properties:
-        id:
-          type: string
-          example: thr_01HZY6P8RB4K5C7X9E2N8MDQ4T
-        deleted:
-          type: boolean
-          enum:
-          - true
-          description: Always `true` on a successful delete.
-          example: true
+        thread:
+          $ref: '#/components/schemas/Thread'
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/ThreadMessage'
+        status:
+          $ref: '#/components/schemas/ThreadStatus'
       example:
-        id: thr_01HZY6P8RB4K5C7X9E2N8MDQ4T
-        deleted: true
+        thread:
+          id: thr_01HZY6P8RB4K5C7X9E2N8MDQ4T
+          title: What accounts does my team own?
+          createdAt: '2026-04-22T14:32:10.000Z'
+          updatedAt: '2026-04-22T14:35:02.000Z'
+          accountId: null
+          secondaryId: null
+          published: false
+          deleted: false
+          threadUrl: https://app.endgame.io/threads/thr_01HZY6P8RB4K5C7X9E2N8MDQ4T
+        messages:
+        - id: msg_01HZY6P8RB4K5C7X9E2N8MDQ4V
+          threadId: thr_01HZY6P8RB4K5C7X9E2N8MDQ4T
+          role: user
+          content: What accounts does my team own?
+          status: null
+          createdAt: '2026-04-22T14:32:10.000Z'
+          completedAt: null
+          steps: null
+          sources: null
+          attachments: null
+          model: null
+        - id: msg_01HZY6P8RB4K5C7X9E2N8MDQ4W
+          threadId: thr_01HZY6P8RB4K5C7X9E2N8MDQ4T
+          role: assistant
+          content: Your team owns 42 accounts. The five largest by ARR are...
+          status: completed
+          createdAt: '2026-04-22T14:32:11.000Z'
+          completedAt: '2026-04-22T14:32:18.000Z'
+          steps:
+          - description: Looking up accounts owned by your team
+          - description: Ranking by annualized revenue
+          sources: null
+          attachments: null
+          model: claude-opus-4-7
+        status:
+          state: idle
+          activeMessageId: null
+          latestUpdate: null
+          stepCount: 2
+    UpdateThreadResponse:
+      type: object
+      required:
+      - thread
+      properties:
+        thread:
+          $ref: '#/components/schemas/Thread'
+    ListThreadsResponse:
+      type: object
+      required:
+      - threads
+      - nextCursor
+      - truncated
+      properties:
+        threads:
+          type: array
+          items:
+            $ref: '#/components/schemas/Thread'
+        nextCursor:
+          type:
+          - string
+          - 'null'
+          description: Opaque cursor for the next page. `null` when there are no more pages.
+          example: MjAyNi0wNC0yMlQxNDozNTowMi4wMDBafHRocl8wMUhaWTZQOFJCNEs1QzdYOUUyTjhNRFE0VA==
+        truncated:
+          type: boolean
+          description: '`true` when the organization has more threads than the server-side pagination window can walk. Narrow the result with `accountId` to retrieve the threads this page can''t surface.'
+          example: false
+      example:
+        threads:
+        - id: thr_01HZY6P8RB4K5C7X9E2N8MDQ4T
+          title: What accounts does my team own?
+          createdAt: '2026-04-22T14:32:10.000Z'
+          updatedAt: '2026-04-22T14:35:02.000Z'
+          accountId: null
+          secondaryId: null
+          published: false
+          deleted: false
+          threadUrl: https://app.endgame.io/threads/thr_01HZY6P8RB4K5C7X9E2N8MDQ4T
+        nextCursor: null
+        truncated: false
+    CreateThreadResponse:
+      type: object
+      required:
+      - thread
+      properties:
+        thread:
+          $ref: '#/components/schemas/Thread'
+        messageId:
+          type: string
+          description: ID of the user message persisted from `prompt`.
+          example: msg_01HZY6P8RB4K5C7X9E2N8MDQ4V
+        responseMessageId:
+          type: string
+          description: ID of the in-flight assistant response message. Poll `GET /api/v1/threads/{id}` until this message's `status` is `completed` or `failed`.
+          example: msg_01HZY6P8RB4K5C7X9E2N8MDQ4W
+      example:
+        thread:
+          id: thr_01HZY6P8RB4K5C7X9E2N8MDQ4T
+          title: What accounts does my team own?
+          createdAt: '2026-04-22T14:32:10.000Z'
+          updatedAt: null
+          accountId: null
+          secondaryId: null
+          published: false
+          deleted: false
+          threadUrl: null
+        messageId: msg_01HZY6P8RB4K5C7X9E2N8MDQ4V
+        responseMessageId: msg_01HZY6P8RB4K5C7X9E2N8MDQ4W
     ThreadStatus:
       type: object
       description: Derived run status based on the latest assistant message.
@@ -196,13 +771,32 @@ components:
           minimum: 0
           description: Number of reasoning steps emitted on the active assistant message.
           example: 0
-    UpdateThreadResponse:
+    CreateThreadRequest:
       type: object
+      description: Parameters for creating a thread. `prompt` is required; `title` auto-generates from it if omitted.
       required:
-      - thread
+      - prompt
       properties:
-        thread:
-          $ref: '#/components/schemas/Thread'
+        prompt:
+          type: string
+          minLength: 1
+          description: First user message on the thread. Persisted immediately and triggers an assistant response that generates asynchronously.
+          example: What accounts does my team own?
+        title:
+          type: string
+          minLength: 1
+          description: Explicit title. If omitted, the title is auto-generated from the prompt.
+          example: Book of business review
+        accountId:
+          type: string
+          description: Associate the thread with an account ID.
+          example: 0018b00000abCdEfGhI
+        secondaryId:
+          type: string
+          description: Secondary linkage (e.g. opportunity, user).
+          example: 0068b00000abCdEfGhI
+      example:
+        prompt: What accounts does my team own?
     ThreadMessage:
       type: object
       description: A single message on a thread.
@@ -385,164 +979,24 @@ components:
         published: false
         deleted: false
         threadUrl: https://app.endgame.io/threads/thr_01HZY6P8RB4K5C7X9E2N8MDQ4T
-    GetThreadResponse:
+    DeleteThreadResponse:
       type: object
       required:
-      - thread
-      - messages
-      - status
+      - id
+      - deleted
       properties:
-        thread:
-          $ref: '#/components/schemas/Thread'
-        messages:
-          type: array
-          items:
-            $ref: '#/components/schemas/ThreadMessage'
-        status:
-          $ref: '#/components/schemas/ThreadStatus'
-      example:
-        thread:
-          id: thr_01HZY6P8RB4K5C7X9E2N8MDQ4T
-          title: What accounts does my team own?
-          createdAt: '2026-04-22T14:32:10.000Z'
-          updatedAt: '2026-04-22T14:35:02.000Z'
-          accountId: null
-          secondaryId: null
-          published: false
-          deleted: false
-          threadUrl: https://app.endgame.io/threads/thr_01HZY6P8RB4K5C7X9E2N8MDQ4T
-        messages:
-        - id: msg_01HZY6P8RB4K5C7X9E2N8MDQ4V
-          threadId: thr_01HZY6P8RB4K5C7X9E2N8MDQ4T
-          role: user
-          content: What accounts does my team own?
-          status: null
-          createdAt: '2026-04-22T14:32:10.000Z'
-          completedAt: null
-          steps: null
-          sources: null
-          attachments: null
-          model: null
-        - id: msg_01HZY6P8RB4K5C7X9E2N8MDQ4W
-          threadId: thr_01HZY6P8RB4K5C7X9E2N8MDQ4T
-          role: assistant
-          content: Your team owns 42 accounts. The five largest by ARR are...
-          status: completed
-          createdAt: '2026-04-22T14:32:11.000Z'
-          completedAt: '2026-04-22T14:32:18.000Z'
-          steps:
-          - description: Looking up accounts owned by your team
-          - description: Ranking by annualized revenue
-          sources: null
-          attachments: null
-          model: claude-opus-4-7
-        status:
-          state: idle
-          activeMessageId: null
-          latestUpdate: null
-          stepCount: 2
-    UpdateThreadRequest:
-      type: object
-      description: Only `title` is writable. Unknown fields are rejected with `INVALID_PARAMS`.
-      additionalProperties: false
-      required:
-      - title
-      properties:
-        title:
+        id:
           type: string
-          minLength: 1
-          description: New title. Must be at least one character.
-          example: Book of business review — Q2
-      example:
-        title: Book of business review — Q2
-    CreateThreadRequest:
-      type: object
-      description: Parameters for creating a thread. `prompt` is required; `title` auto-generates from it if omitted.
-      required:
-      - prompt
-      properties:
-        prompt:
-          type: string
-          minLength: 1
-          description: First user message on the thread. Persisted immediately and triggers an assistant response that generates asynchronously.
-          example: What accounts does my team own?
-        title:
-          type: string
-          minLength: 1
-          description: Explicit title. If omitted, the title is auto-generated from the prompt.
-          example: Book of business review
-        accountId:
-          type: string
-          description: Associate the thread with an account ID.
-          example: 0018b00000abCdEfGhI
-        secondaryId:
-          type: string
-          description: Secondary linkage (e.g. opportunity, user).
-          example: 0068b00000abCdEfGhI
-      example:
-        prompt: What accounts does my team own?
-    CreateThreadResponse:
-      type: object
-      required:
-      - thread
-      properties:
-        thread:
-          $ref: '#/components/schemas/Thread'
-        messageId:
-          type: string
-          description: ID of the user message persisted from `prompt`.
-          example: msg_01HZY6P8RB4K5C7X9E2N8MDQ4V
-        responseMessageId:
-          type: string
-          description: ID of the in-flight assistant response message. Poll `GET /api/v1/threads/{id}` until this message's `status` is `completed` or `failed`.
-          example: msg_01HZY6P8RB4K5C7X9E2N8MDQ4W
-      example:
-        thread:
-          id: thr_01HZY6P8RB4K5C7X9E2N8MDQ4T
-          title: What accounts does my team own?
-          createdAt: '2026-04-22T14:32:10.000Z'
-          updatedAt: null
-          accountId: null
-          secondaryId: null
-          published: false
-          deleted: false
-          threadUrl: null
-        messageId: msg_01HZY6P8RB4K5C7X9E2N8MDQ4V
-        responseMessageId: msg_01HZY6P8RB4K5C7X9E2N8MDQ4W
-    ListThreadsResponse:
-      type: object
-      required:
-      - threads
-      - nextCursor
-      - truncated
-      properties:
-        threads:
-          type: array
-          items:
-            $ref: '#/components/schemas/Thread'
-        nextCursor:
-          type:
-          - string
-          - 'null'
-          description: Opaque cursor for the next page. `null` when there are no more pages.
-          example: MjAyNi0wNC0yMlQxNDozNTowMi4wMDBafHRocl8wMUhaWTZQOFJCNEs1QzdYOUUyTjhNRFE0VA==
-        truncated:
+          example: thr_01HZY6P8RB4K5C7X9E2N8MDQ4T
+        deleted:
           type: boolean
-          description: '`true` when the organization has more threads than the server-side pagination window can walk. Narrow the result with `accountId` to retrieve the threads this page can''t surface.'
-          example: false
+          enum:
+          - true
+          description: Always `true` on a successful delete.
+          example: true
       example:
-        threads:
-        - id: thr_01HZY6P8RB4K5C7X9E2N8MDQ4T
-          title: What accounts does my team own?
-          createdAt: '2026-04-22T14:32:10.000Z'
-          updatedAt: '2026-04-22T14:35:02.000Z'
-          accountId: null
-          secondaryId: null
-          published: false
-          deleted: false
-          threadUrl: https://app.endgame.io/threads/thr_01HZY6P8RB4K5C7X9E2N8MDQ4T
-        nextCursor: null
-        truncated: false
+        id: thr_01HZY6P8RB4K5C7X9E2N8MDQ4T
+        deleted: true
     Error:
       type: object
       required:
@@ -579,16 +1033,11 @@ components:
           code: INVALID_PARAMS
           message: 'prompt: String must contain at least 1 character(s)'
           trace_id: 01HZY6P8RB4K5C7X9E2N8MDQ4T
-  parameters:
-    ThreadId:
-      name: id
-      in: path
-      required: true
-      description: Thread identifier.
-      schema:
-        type: string
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
       description: 'One of: an Endgame API key prefixed `eak_` (created from Settings → API Keys with a Personal or Org-wide scope), or a WorkOS access token from an Endgame-provisioned M2M application (created from Settings → Applications and exchanged via the `client_credentials` grant).'
+x-refined-from:
+- end-game-openapi.json
+- end-game-public-api-served-openapi.json

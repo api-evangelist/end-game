@@ -1,14 +1,40 @@
 {
   "provider": "end-game",
   "sources": [
-    "end-game-threads-api-openapi.yml"
+    "_original/end-game-openapi.json",
+    "_original/end-game-public-api-served-openapi.json"
   ],
   "outputs": [
-    "end-game-threads-api-openapi.yml"
+    "end-game-threads-api-openapi.yml",
+    "end-game-internal-api-openapi.yml",
+    "end-game-protected-static-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "end-game-openapi.json: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "end-game-openapi.json: declared missing tag: Threads",
+    "end-game-public-api-served-openapi.json: upgraded openapi 3.1.1 -> OpenAPI 3.2.0",
+    "end-game-public-api-served-openapi.json: tagged paths GET /protected-static/objects -> Protected Static",
+    "end-game-public-api-served-openapi.json: tagged paths PUT /protected-static/objects -> Protected Static",
+    "end-game-public-api-served-openapi.json: tagged paths DELETE /protected-static/objects -> Protected Static",
+    "end-game-public-api-served-openapi.json: tagged paths GET /protected-static/objects/content -> Protected Static",
+    "end-game-public-api-served-openapi.json: tagged paths POST /threads -> Threads",
+    "end-game-public-api-served-openapi.json: tagged paths GET /threads -> Threads",
+    "end-game-public-api-served-openapi.json: tagged paths GET /threads/{id} -> Threads",
+    "end-game-public-api-served-openapi.json: tagged paths PATCH /threads/{id} -> Threads",
+    "end-game-public-api-served-openapi.json: tagged paths DELETE /threads/{id} -> Threads",
+    "end-game-public-api-served-openapi.json: tagged paths GET /internal/feedback -> Internal",
+    "end-game-public-api-served-openapi.json: tagged paths POST /internal/feedback/promote -> Internal",
+    "end-game-public-api-served-openapi.json: tagged paths POST /internal/feedback/dismiss -> Internal",
+    "end-game-public-api-served-openapi.json: declared missing tag: Internal",
+    "end-game-public-api-served-openapi.json: declared missing tag: Protected Static",
+    "end-game-public-api-served-openapi.json: declared missing tag: Threads",
+    "tag 'Threads' spans 2 source specs (end-game-openapi.json, end-game-public-api-served-openapi.json): per-path servers applied"
+  ],
+  "skipped": [
+    "end-game-threads-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

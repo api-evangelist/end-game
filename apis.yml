@@ -66,11 +66,10 @@ apis:
 - aid: end-game:end-game-threads-api
   name: Endgame Threads API
   description: >-
-    The public Threads API from Endgame — 5 operations (create, get, list, rename,
-    delete) rooted at /api/v1 on https://app.endgame.io, authenticated with a Bearer
-    eak_ API key or a WorkOS M2M access token. Threads are the conversational unit
-    behind Endgame Chat: POST a natural-language prompt, then poll the thread until
-    the assistant's asynchronous response reaches status.state idle or error.
+    The public Threads API from Endgame — 5 operations (create, get, list, rename, delete) rooted at /api/v1
+    on https://app.endgame.io, authenticated with a Bearer eak_ API key or a WorkOS M2M access token.
+    Threads are the conversational unit behind Endgame Chat: POST a natural-language prompt, then poll
+    the thread until the assistant's asynchronous response reaches status.state idle or error.
   humanURL: https://docs.endgame.io/api-reference/introduction
   baseURL: https://app.endgame.io
   tags:
@@ -87,6 +86,26 @@ apis:
     url: https://docs.endgame.io/api-reference/endpoints
   - type: Authentication
     url: https://docs.endgame.io/api-reference/authentication
+- aid: end-game:end-game-internal-api
+  name: Endgame Internal API
+  description: The Internal API from Endgame — 3 operation(s) for internal.
+  humanURL: https://docs.endgame.io/api-reference/introduction
+  baseURL: https://app.endgame.io
+  tags:
+  - Internal
+  properties:
+  - type: OpenAPI
+    url: openapi/end-game-internal-api-openapi.yml
+- aid: end-game:end-game-protected-static-api
+  name: Endgame Protected Static API
+  description: The Protected Static API from Endgame — 2 operation(s) for protected static.
+  humanURL: https://docs.endgame.io/api-reference/introduction
+  baseURL: https://app.endgame.io
+  tags:
+  - Protected Static
+  properties:
+  - type: OpenAPI
+    url: openapi/end-game-protected-static-api-openapi.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
