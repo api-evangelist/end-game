@@ -14,6 +14,19 @@ description: >-
   was surfaced through the API Evangelist VC-portfolio pipeline and has been
   enriched from its published developer documentation, OpenAPI, MCP server, and
   trust/security programs.
+deliveryModel:
+  model: unknown
+  open_source: unknown
+  commercial: true
+  callable_host: true
+  label: Delivery model not determined — needs a product licence on record
+  confidence: low
+  source:
+  - openapi
+  - pricing
+  - repository-unlicensed
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: self-serve
