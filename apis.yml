@@ -112,6 +112,9 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: License
+  name: MIT
+  url: https://github.com/Endgame-Labs/endgame-cli/blob/main/LICENSE
 - type: TrustCenter
   url: security/end-game-trust-center.yml
 - type: DomainSecurity
