@@ -207,6 +207,8 @@ common:
 - type: LLMsTxt
   name: Endgame website llms.txt
   url: llms/end-game-website-llms.txt
+- type: Contact
+  url: mailto:support@endgame.io
 x-enrichment:
   date: '2026-08-13'
   status: enriched
