@@ -1,0 +1,31 @@
+# Front Door AI Index — end-game — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: end-game
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: www.endgame.io
+  final_host: www.endgame.io
+  ownership: own
+  owner: end-game
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 16
+  host_score: 16
+  density: 14.69
+  words: 1089
+  tiers:
+    agentic: 1
+    core: 8
+    model: 7
+  ambiguous: 15
+  top_terms:
+    agent: 14
+    AI: 8
+    Claude: 4
+    ChatGPT: 2
+    GPT: 1
+    MCP: 1
+    intelligence: 1

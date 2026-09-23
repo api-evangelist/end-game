@@ -576,42 +576,102 @@ paths:
     servers:
     - url: https://app.endgame.io
 components:
-  responses:
-    Forbidden:
-      description: Credential is valid but not permitted. Either the operation requires a user-scoped API key (org-wide credentials cannot mutate threads during beta), or the caller is user-scoped but did not create the thread. See [Errors](/api-reference/endpoints#errors) for the full error envelope.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    InvalidParams:
-      description: Request body or query parameters failed validation. See [Errors](/api-reference/endpoints#errors) for the full error envelope and code list.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-  parameters:
-    ThreadId:
-      name: id
-      in: path
-      required: true
-      description: Thread identifier.
-      schema:
-        type: string
   schemas:
-    UpdateThreadRequest:
+    DeleteThreadResponse:
       type: object
-      description: Only `title` is writable. Unknown fields are rejected with `INVALID_PARAMS`.
-      additionalProperties: false
       required:
-      - title
+      - id
+      - deleted
       properties:
+        id:
+          type: string
+          example: thr_01HZY6P8RB4K5C7X9E2N8MDQ4T
+        deleted:
+          type: boolean
+          enum:
+          - true
+          description: Always `true` on a successful delete.
+          example: true
+      example:
+        id: thr_01HZY6P8RB4K5C7X9E2N8MDQ4T
+        deleted: true
+    Thread:
+      type: object
+      description: Public representation of a thread.
+      required:
+      - id
+      - title
+      - createdAt
+      - updatedAt
+      - accountId
+      - secondaryId
+      - published
+      - deleted
+      - threadUrl
+      properties:
+        id:
+          type: string
+          description: Stable thread identifier.
+          readOnly: true
+          example: thr_01HZY6P8RB4K5C7X9E2N8MDQ4T
         title:
           type: string
-          minLength: 1
-          description: New title. Must be at least one character.
-          example: Book of business review — Q2
+          description: Human-readable title. Auto-generated from the first prompt when a thread is created without an explicit title.
+          example: What accounts does my team own?
+        createdAt:
+          type: string
+          format: date-time
+          description: ISO 8601 timestamp of thread creation.
+          readOnly: true
+          example: '2026-04-22T14:32:10.000Z'
+        updatedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: ISO 8601 timestamp of the last update. `null` if never updated.
+          readOnly: true
+          example: '2026-04-22T14:35:02.000Z'
+        accountId:
+          type:
+          - string
+          - 'null'
+          description: Associated account ID, if any.
+          example: 0018b00000abCdEfGhI
+        secondaryId:
+          type:
+          - string
+          - 'null'
+          description: Secondary linkage (e.g. opportunity, user). Settable on create only.
+          example: null
+        published:
+          type: boolean
+          description: Whether the thread is published to the organization.
+          readOnly: true
+          example: false
+        deleted:
+          type: boolean
+          description: Whether the thread has been soft-deleted.
+          readOnly: true
+          example: false
+        threadUrl:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: Deep link into the Endgame app for this thread.
+          readOnly: true
+          example: https://app.endgame.io/threads/thr_01HZY6P8RB4K5C7X9E2N8MDQ4T
       example:
-        title: Book of business review — Q2
+        id: thr_01HZY6P8RB4K5C7X9E2N8MDQ4T
+        title: What accounts does my team own?
+        createdAt: '2026-04-22T14:32:10.000Z'
+        updatedAt: '2026-04-22T14:35:02.000Z'
+        accountId: 0018b00000abCdEfGhI
+        secondaryId: null
+        published: false
+        deleted: false
+        threadUrl: https://app.endgame.io/threads/thr_01HZY6P8RB4K5C7X9E2N8MDQ4T
     GetThreadResponse:
       type: object
       required:
@@ -668,75 +728,6 @@ components:
           activeMessageId: null
           latestUpdate: null
           stepCount: 2
-    UpdateThreadResponse:
-      type: object
-      required:
-      - thread
-      properties:
-        thread:
-          $ref: '#/components/schemas/Thread'
-    ListThreadsResponse:
-      type: object
-      required:
-      - threads
-      - nextCursor
-      - truncated
-      properties:
-        threads:
-          type: array
-          items:
-            $ref: '#/components/schemas/Thread'
-        nextCursor:
-          type:
-          - string
-          - 'null'
-          description: Opaque cursor for the next page. `null` when there are no more pages.
-          example: MjAyNi0wNC0yMlQxNDozNTowMi4wMDBafHRocl8wMUhaWTZQOFJCNEs1QzdYOUUyTjhNRFE0VA==
-        truncated:
-          type: boolean
-          description: '`true` when the organization has more threads than the server-side pagination window can walk. Narrow the result with `accountId` to retrieve the threads this page can''t surface.'
-          example: false
-      example:
-        threads:
-        - id: thr_01HZY6P8RB4K5C7X9E2N8MDQ4T
-          title: What accounts does my team own?
-          createdAt: '2026-04-22T14:32:10.000Z'
-          updatedAt: '2026-04-22T14:35:02.000Z'
-          accountId: null
-          secondaryId: null
-          published: false
-          deleted: false
-          threadUrl: https://app.endgame.io/threads/thr_01HZY6P8RB4K5C7X9E2N8MDQ4T
-        nextCursor: null
-        truncated: false
-    CreateThreadResponse:
-      type: object
-      required:
-      - thread
-      properties:
-        thread:
-          $ref: '#/components/schemas/Thread'
-        messageId:
-          type: string
-          description: ID of the user message persisted from `prompt`.
-          example: msg_01HZY6P8RB4K5C7X9E2N8MDQ4V
-        responseMessageId:
-          type: string
-          description: ID of the in-flight assistant response message. Poll `GET /api/v1/threads/{id}` until this message's `status` is `completed` or `failed`.
-          example: msg_01HZY6P8RB4K5C7X9E2N8MDQ4W
-      example:
-        thread:
-          id: thr_01HZY6P8RB4K5C7X9E2N8MDQ4T
-          title: What accounts does my team own?
-          createdAt: '2026-04-22T14:32:10.000Z'
-          updatedAt: null
-          accountId: null
-          secondaryId: null
-          published: false
-          deleted: false
-          threadUrl: null
-        messageId: msg_01HZY6P8RB4K5C7X9E2N8MDQ4V
-        responseMessageId: msg_01HZY6P8RB4K5C7X9E2N8MDQ4W
     ThreadStatus:
       type: object
       description: Derived run status based on the latest assistant message.
@@ -771,32 +762,6 @@ components:
           minimum: 0
           description: Number of reasoning steps emitted on the active assistant message.
           example: 0
-    CreateThreadRequest:
-      type: object
-      description: Parameters for creating a thread. `prompt` is required; `title` auto-generates from it if omitted.
-      required:
-      - prompt
-      properties:
-        prompt:
-          type: string
-          minLength: 1
-          description: First user message on the thread. Persisted immediately and triggers an assistant response that generates asynchronously.
-          example: What accounts does my team own?
-        title:
-          type: string
-          minLength: 1
-          description: Explicit title. If omitted, the title is auto-generated from the prompt.
-          example: Book of business review
-        accountId:
-          type: string
-          description: Associate the thread with an account ID.
-          example: 0018b00000abCdEfGhI
-        secondaryId:
-          type: string
-          description: Secondary linkage (e.g. opportunity, user).
-          example: 0068b00000abCdEfGhI
-      example:
-        prompt: What accounts does my team own?
     ThreadMessage:
       type: object
       description: A single message on a thread.
@@ -902,101 +867,82 @@ components:
           description: Identifier of the model that produced the message, if applicable.
           readOnly: true
           example: claude-opus-4-7
-    Thread:
+    UpdateThreadRequest:
       type: object
-      description: Public representation of a thread.
+      description: Only `title` is writable. Unknown fields are rejected with `INVALID_PARAMS`.
+      additionalProperties: false
       required:
-      - id
       - title
-      - createdAt
-      - updatedAt
-      - accountId
-      - secondaryId
-      - published
-      - deleted
-      - threadUrl
       properties:
-        id:
-          type: string
-          description: Stable thread identifier.
-          readOnly: true
-          example: thr_01HZY6P8RB4K5C7X9E2N8MDQ4T
         title:
           type: string
-          description: Human-readable title. Auto-generated from the first prompt when a thread is created without an explicit title.
-          example: What accounts does my team own?
-        createdAt:
-          type: string
-          format: date-time
-          description: ISO 8601 timestamp of thread creation.
-          readOnly: true
-          example: '2026-04-22T14:32:10.000Z'
-        updatedAt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: ISO 8601 timestamp of the last update. `null` if never updated.
-          readOnly: true
-          example: '2026-04-22T14:35:02.000Z'
-        accountId:
-          type:
-          - string
-          - 'null'
-          description: Associated account ID, if any.
-          example: 0018b00000abCdEfGhI
-        secondaryId:
-          type:
-          - string
-          - 'null'
-          description: Secondary linkage (e.g. opportunity, user). Settable on create only.
-          example: null
-        published:
-          type: boolean
-          description: Whether the thread is published to the organization.
-          readOnly: true
-          example: false
-        deleted:
-          type: boolean
-          description: Whether the thread has been soft-deleted.
-          readOnly: true
-          example: false
-        threadUrl:
-          type:
-          - string
-          - 'null'
-          format: uri
-          description: Deep link into the Endgame app for this thread.
-          readOnly: true
-          example: https://app.endgame.io/threads/thr_01HZY6P8RB4K5C7X9E2N8MDQ4T
+          minLength: 1
+          description: New title. Must be at least one character.
+          example: Book of business review — Q2
       example:
-        id: thr_01HZY6P8RB4K5C7X9E2N8MDQ4T
-        title: What accounts does my team own?
-        createdAt: '2026-04-22T14:32:10.000Z'
-        updatedAt: '2026-04-22T14:35:02.000Z'
-        accountId: 0018b00000abCdEfGhI
-        secondaryId: null
-        published: false
-        deleted: false
-        threadUrl: https://app.endgame.io/threads/thr_01HZY6P8RB4K5C7X9E2N8MDQ4T
-    DeleteThreadResponse:
+        title: Book of business review — Q2
+    ListThreadsResponse:
       type: object
       required:
-      - id
-      - deleted
+      - threads
+      - nextCursor
+      - truncated
       properties:
-        id:
-          type: string
-          example: thr_01HZY6P8RB4K5C7X9E2N8MDQ4T
-        deleted:
+        threads:
+          type: array
+          items:
+            $ref: '#/components/schemas/Thread'
+        nextCursor:
+          type:
+          - string
+          - 'null'
+          description: Opaque cursor for the next page. `null` when there are no more pages.
+          example: MjAyNi0wNC0yMlQxNDozNTowMi4wMDBafHRocl8wMUhaWTZQOFJCNEs1QzdYOUUyTjhNRFE0VA==
+        truncated:
           type: boolean
-          enum:
-          - true
-          description: Always `true` on a successful delete.
-          example: true
+          description: '`true` when the organization has more threads than the server-side pagination window can walk. Narrow the result with `accountId` to retrieve the threads this page can''t surface.'
+          example: false
       example:
-        id: thr_01HZY6P8RB4K5C7X9E2N8MDQ4T
-        deleted: true
+        threads:
+        - id: thr_01HZY6P8RB4K5C7X9E2N8MDQ4T
+          title: What accounts does my team own?
+          createdAt: '2026-04-22T14:32:10.000Z'
+          updatedAt: '2026-04-22T14:35:02.000Z'
+          accountId: null
+          secondaryId: null
+          published: false
+          deleted: false
+          threadUrl: https://app.endgame.io/threads/thr_01HZY6P8RB4K5C7X9E2N8MDQ4T
+        nextCursor: null
+        truncated: false
+    CreateThreadResponse:
+      type: object
+      required:
+      - thread
+      properties:
+        thread:
+          $ref: '#/components/schemas/Thread'
+        messageId:
+          type: string
+          description: ID of the user message persisted from `prompt`.
+          example: msg_01HZY6P8RB4K5C7X9E2N8MDQ4V
+        responseMessageId:
+          type: string
+          description: ID of the in-flight assistant response message. Poll `GET /api/v1/threads/{id}` until this message's `status` is `completed` or `failed`.
+          example: msg_01HZY6P8RB4K5C7X9E2N8MDQ4W
+      example:
+        thread:
+          id: thr_01HZY6P8RB4K5C7X9E2N8MDQ4T
+          title: What accounts does my team own?
+          createdAt: '2026-04-22T14:32:10.000Z'
+          updatedAt: null
+          accountId: null
+          secondaryId: null
+          published: false
+          deleted: false
+          threadUrl: null
+        messageId: msg_01HZY6P8RB4K5C7X9E2N8MDQ4V
+        responseMessageId: msg_01HZY6P8RB4K5C7X9E2N8MDQ4W
     Error:
       type: object
       required:
@@ -1033,6 +979,60 @@ components:
           code: INVALID_PARAMS
           message: 'prompt: String must contain at least 1 character(s)'
           trace_id: 01HZY6P8RB4K5C7X9E2N8MDQ4T
+    CreateThreadRequest:
+      type: object
+      description: Parameters for creating a thread. `prompt` is required; `title` auto-generates from it if omitted.
+      required:
+      - prompt
+      properties:
+        prompt:
+          type: string
+          minLength: 1
+          description: First user message on the thread. Persisted immediately and triggers an assistant response that generates asynchronously.
+          example: What accounts does my team own?
+        title:
+          type: string
+          minLength: 1
+          description: Explicit title. If omitted, the title is auto-generated from the prompt.
+          example: Book of business review
+        accountId:
+          type: string
+          description: Associate the thread with an account ID.
+          example: 0018b00000abCdEfGhI
+        secondaryId:
+          type: string
+          description: Secondary linkage (e.g. opportunity, user).
+          example: 0068b00000abCdEfGhI
+      example:
+        prompt: What accounts does my team own?
+    UpdateThreadResponse:
+      type: object
+      required:
+      - thread
+      properties:
+        thread:
+          $ref: '#/components/schemas/Thread'
+  parameters:
+    ThreadId:
+      name: id
+      in: path
+      required: true
+      description: Thread identifier.
+      schema:
+        type: string
+  responses:
+    Forbidden:
+      description: Credential is valid but not permitted. Either the operation requires a user-scoped API key (org-wide credentials cannot mutate threads during beta), or the caller is user-scoped but did not create the thread. See [Errors](/api-reference/endpoints#errors) for the full error envelope.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    InvalidParams:
+      description: Request body or query parameters failed validation. See [Errors](/api-reference/endpoints#errors) for the full error envelope and code list.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http

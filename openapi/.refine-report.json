@@ -32,9 +32,12 @@
     "end-game-public-api-served-openapi.json: declared missing tag: Internal",
     "end-game-public-api-served-openapi.json: declared missing tag: Protected Static",
     "end-game-public-api-served-openapi.json: declared missing tag: Threads",
-    "tag 'Threads' spans 2 source specs (end-game-openapi.json, end-game-public-api-served-openapi.json): per-path servers applied"
+    "tag 'Threads' spans 2 source specs (end-game-openapi.json, end-game-public-api-served-openapi.json): per-path servers applied",
+    "apis.yml register: already-registered"
   ],
   "skipped": [
+    "end-game-internal-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "end-game-protected-static-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "end-game-threads-api-openapi.yml: previously refined output, superseded by openapi/_original/"
   ]
 }
