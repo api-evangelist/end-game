@@ -62,6 +62,7 @@ tags:
 - Knowledge Graph
 - CRM
 - Conversation Intelligence
+- A2A
 apis:
 - aid: end-game:end-game-threads-api
   name: Endgame Threads API
@@ -214,3 +215,10 @@ x-enrichment:
   status: enriched
   artifacts_added: 13
   pass: local-v1
+x-a2a:
+  verified: true
+  probed: '2026-09-26'
+  url: "https://docs.endgame.io/.well-known/agent-card.json"
+  grade: "conformant"
+  protocol_version: "0.3"
+  control: 404
