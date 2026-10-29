@@ -1,4 +1,4 @@
-# End Game
+# Endgame
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,6 +64,146 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-End Game is a company surfaced as a portfolio company of a16z and added to the API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+Endgame (Endgame Labs, Inc.) is a context graph platform for go-to-market teams and AI agents that turns sales calls, CRM records, emails, Slack conversations, meeting transcripts, and uploaded documents into structured, queryable revenue intelligence. Sales and RevOps users ask questions across their book of business in natural language, and connected AI assistants reach the same knowledge through the Endgame MCP Server. The public REST API (rooted at /api/v1) lets developers create and manage Endgame threads programmatically over HTTPS with Bearer-token authentication, while a broad connector surface ingests context from Salesforce, Gong, Chorus, Clari Copilot, Zoom, Notion, Confluence, Highspot, Seismic, Snowflake, Slack, Microsoft Teams/SharePoint/Outlook, and Google Drive. Endgame was surfaced through the API Evangelist VC-portfolio pipeline and has been enriched from its published developer documentation, OpenAPI, MCP server, and trust/security programs.
 
-Backed by: a16z
+**Areas:** Company · Sales · Revenue Intelligence · Go-To-Market · Artificial Intelligence · Agents · MCP · Knowledge Graph · CRM · Conversation Intelligence · A2A
+
+## Endgame on APIs.io
+
+Everything profiled for Endgame is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/end-game/](https://apis.io/providers/end-game/)** — or go straight to one of the APIs or properties below.
+
+### APIs (3)
+
+- [Endgame Threads API](https://apis.io/apis/end-game/end-game-threads-api/) — The public Threads API from Endgame — 5 operations (create, get, list, rename, delete) rooted at /api/v1 on https://app.endgame.io, authenticated with a…
+- [Endgame Internal API](https://apis.io/apis/end-game/end-game-internal-api/) — The Internal API from Endgame — 3 operation(s) for internal.
+- [Endgame Protected Static API](https://apis.io/apis/end-game/end-game-protected-static-api/) — The Protected Static API from Endgame — 2 operation(s) for protected static.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [endgame](https://apis.io/servers/end-game/endgame/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [End Game Agentic Access](https://apis.io/agentic-access/end-game/end-game-agentic-access/)
+
+#### Collections (1)
+
+Postman and Open Collection request collections.
+
+- [Endgame Public Threads API](https://apis.io/collections/end-game/open-end-game-threads-api/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [End Game Openapi Overlay](https://apis.io/overlays/end-game/end-game-openapi-overlay/)
+
+#### Security (4)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [End Game Authentication](https://apis.io/security/end-game/end-game-authentication/)
+- [End Game Domain Security](https://apis.io/security/end-game/end-game-domain-security/)
+- [End Game Trust Center](https://apis.io/security/end-game/end-game-trust-center/)
+- [End Game Vulnerability Disclosure](https://apis.io/security/end-game/end-game-vulnerability-disclosure/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [End Game Scopes](https://apis.io/scopes/end-game/end-game-scopes/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [End Game Plans Pricing](https://apis.io/plans/end-game/end-game-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [End Game Rate Limits](https://apis.io/rate-limits/end-game/end-game-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.endgame.io)
+- [Documentation](https://docs.endgame.io)
+- [Getting started](https://docs.endgame.io/api-reference/introduction)
+- [API reference](https://docs.endgame.io/api-reference/endpoints)
+- [Sign up](https://www.endgame.io/signup)
+- [Support](https://docs.endgame.io/contact)
+- [Changelog](https://docs.endgame.io/changelog)
+- [Blog](https://www.endgame.io/blog)
+- [Security](https://docs.endgame.io/vdp)
+- [Compliance](https://docs.endgame.io/trust/security)
+- [Trust centre](https://app.drata.com/trust/9cbf820f-0c38-11ee-865f-029d78a187d9)
+- [Terms of service](https://www.endgame.io/terms)
+- [Privacy policy](https://docs.endgame.io/trust/privacy)
+- [GitHub](https://github.com/Endgame-Labs)
+- [Status](https://status.endgame.io)
+
+## API Evangelist rating
+
+**Kin Score 57.5** — strong · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 75.0 |
+| Contract quality | 46.9 |
+| Contract governance | 18.2 |
+| Operational transparency | 65.8 |
+| Developer ergonomics | 71.4 |
+| Access clarity | 50.0 |
+
+**Agent readiness 49.7** — agent-ready (gated down from agent-native)
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | verified |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | derived (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | yes |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | verified |
+| Dynamic Client Registration | yes |
+| Agentic Commerce | — |
+| Pagination Ratio | paginated |
+| Operation Distinctiveness | — |
+
+**Regulatory alignment 41.8** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/end-game/](https://apis.io/providers/end-game/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Endgame: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/end-game/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
